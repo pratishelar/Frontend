@@ -1,0 +1,59 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+	color-scheme: light;
+	--font-display: 'Inter', 'Segoe UI', sans-serif;
+	--font-body: 'Inter', 'Segoe UI', sans-serif;
+	--bg-canvas: #f1f5f9;
+	--surface-1: #ffffff;
+	--surface-2: #f8fafc;
+	--text-1: #1e293b;
+	--text-2: #475569;
+	--text-3: #64748b;
+	--line: #e2e8f0;
+	--line-strong: #cbd5e1;
+	--primary: #3b82f6;
+	--primary-strong: #2563eb;
+	--primary-soft: #eff6ff;
+	--success: #16a34a;
+	--warning: #d97706;
+	--danger: #ef4444;
+	--radius-card: 8px;
+	--radius-control: 6px;
+	--shadow-soft: none;
+	--shadow-card: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-body);
+	background: var(--bg-canvas);
+	color: var(--text-1);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-display);
+	letter-spacing: -0.02em;
+}
+
+button,
+input,
+select {
+	font-family: inherit;
+}

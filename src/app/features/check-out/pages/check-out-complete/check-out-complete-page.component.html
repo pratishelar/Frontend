@@ -1,0 +1,94 @@
+<section class="complete-page">
+  <header class="success-bar">
+    <div>
+      <h2><i class="bi bi-check-lg"></i> Check-out Complete!</h2>
+      <p>Maria Garcia · Room 305 · 29 May 2026, 11:08 AM · Stayed 1 night</p>
+    </div>
+    <a routerLink="/check-out/queue" class="next-guest">Next Guest: Lisa Wong →</a>
+  </header>
+
+  <div class="layout-grid">
+    <article class="panel receipt-panel">
+      <h3>Checkout Receipt</h3>
+      <div class="guest-strip">
+        <span class="avatar">MG</span>
+        <div>
+          <strong>Maria Garcia</strong>
+          <p>Silver Member · Room 305 Suite · 1 night</p>
+          <small>28 May - 29 May 2026</small>
+        </div>
+        <span class="paid-pill">Paid $717.18</span>
+      </div>
+
+      <div class="receipt-list">
+        <div><span>Room - Suite 305 (1 night)</span><strong>$220.00</strong></div>
+        <div><span>Restaurant - Breakfast</span><strong>$48.00</strong></div>
+        <div><span>Restaurant - Dinner (RS)</span><strong>$67.50</strong></div>
+        <div><span>Mini Bar</span><strong>$24.00</strong></div>
+        <div><span>Spa - Couples massage</span><strong>$180.00</strong></div>
+        <div><span>Valet Parking (1 night)</span><strong>$25.00</strong></div>
+        <div><span>International Telephone</span><strong>$12.40</strong></div>
+        <div><span>Service Charge (10%)</span><strong>$57.69</strong></div>
+        <div><span>Tax - HST (13%)</span><strong>$82.59</strong></div>
+      </div>
+
+      <div class="total-row">
+        <div>
+          <p>TOTAL PAID</p>
+          <small>Visa ending ••4892 · Approved 11:08 AM · Ref: TXN-290526-0042</small>
+        </div>
+        <strong>$717.18</strong>
+      </div>
+
+      <div class="actions-list">
+        <article class="action-chip" *ngFor="let action of actions" [ngClass]="'tone-' + action.tone">
+          <i class="bi" [ngClass]="action.iconClass"></i>
+          <div>
+            <strong>{{ action.label }}</strong>
+            <small *ngIf="action.note">{{ action.note }}</small>
+          </div>
+        </article>
+      </div>
+
+      <div class="footer-actions">
+        <button type="button" class="ghost-btn"><i class="bi bi-printer"></i> Print Receipt</button>
+        <button type="button" class="ghost-btn"><i class="bi bi-envelope"></i> Email Receipt</button>
+        <button type="button" class="ghost-btn"><i class="bi bi-journal-text"></i> View Folio</button>
+        <button type="button" class="blue-btn"><i class="bi bi-plus-lg"></i> New Booking</button>
+      </div>
+    </article>
+
+    <aside class="panel summary-panel">
+      <h3>Departure Summary</h3>
+
+      <div class="summary-card warning">
+        <p>Housekeeping</p>
+        <small>Room 305 - Suite · Priority Clean required</small>
+        <small>Assigned: Morning crew · Est. ready: 1:00 PM</small>
+      </div>
+
+      <div class="summary-card next-stay">
+        <p>Next Reservation for Room 305</p>
+        <strong>#RES-014 Emma Wilson</strong>
+        <small>Check-in: 05 Jun 2026 · 3 nights · $900</small>
+        <small class="green">7 days away · Suite will be fully serviced</small>
+      </div>
+
+      <div class="progress-block">
+        <h4>Today's Progress</h4>
+        <div class="progress-track"><span></span></div>
+        <p>3 of 8 checked out (38%) · Revenue: $1,137 collected</p>
+        <div class="progress-stats">
+          <div><strong>3</strong><span>Done</span></div>
+          <div><strong>5</strong><span>Pending</span></div>
+          <div><strong>1</strong><span>Overdue</span></div>
+          <div><strong>$1,137</strong><span>Revenue</span></div>
+        </div>
+      </div>
+
+      <a routerLink="/check-out/queue" class="next-guest-btn">→ Next: Lisa Wong (Room 118)</a>
+      <a routerLink="/check-out/queue" class="secondary-link">View Departures Queue</a>
+      <a routerLink="/dashboard" class="secondary-link">Return to Dashboard</a>
+    </aside>
+  </div>
+</section>

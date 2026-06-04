@@ -1,0 +1,34 @@
+<div class="bottom-grid">
+  <article class="panel revenue-panel">
+    <h3>Revenue This Month</h3>
+    <div class="revenue-meta">
+      <p>MTD: $42,800</p>
+      <small>↑ +12% vs last month</small>
+    </div>
+    <div class="sparkline">
+      <span *ngFor="let bar of revenueBars" [style.height.%]="bar"></span>
+    </div>
+  </article>
+
+  <article class="panel quick-panel">
+    <h3>Quick Stats</h3>
+    <div class="quick-grid">
+      <div>
+        <p>Total Rooms</p>
+        <strong>42</strong>
+      </div>
+      <div>
+        <p>Bookings Today</p>
+        <strong>14</strong>
+      </div>
+      <div>
+        <p>Avg Rate</p>
+        <strong>$187</strong>
+      </div>
+      <div>
+        <p>RevPAR</p>
+        <strong>$146</strong>
+      </div>
+    </div>
+  </article>
+</div>

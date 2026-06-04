@@ -1,0 +1,34 @@
+<div class="analytics-grid">
+  <article class="panel occupancy-panel">
+    <div class="panel-head">
+      <h3>Weekly Occupancy</h3>
+      <small>Last 7 days</small>
+    </div>
+    <div class="bar-chart">
+      <div class="bar-wrap" *ngFor="let point of occupancy">
+        <span>{{ point.value }}%</span>
+        <div class="bar" [style.height.%]="point.value"></div>
+        <label>{{ point.day }}</label>
+      </div>
+    </div>
+  </article>
+
+  <article class="panel room-panel">
+    <h3>Room Status</h3>
+    <div class="floors">
+      <div class="floor-row" *ngFor="let floor of floors">
+        <p>{{ floor.floor }}</p>
+        <div class="room-row">
+          <span class="room-chip" *ngFor="let room of floor.rooms" [ngClass]="room.status">{{ room.number }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="dot available"></i>Avail</span>
+      <span><i class="dot occupied"></i>Occup</span>
+      <span><i class="dot cleaning"></i>Clean</span>
+      <span><i class="dot ooo"></i>OOO</span>
+    </div>
+    <small class="status-line">Available: 10 Occupied: 5 Cleaning: 2 OOO: 1</small>
+  </article>
+</div>

@@ -1,0 +1,120 @@
+<section class="folio-page">
+  <header class="page-head">
+    <a routerLink="/check-out/queue" class="back-link"><i class="bi bi-arrow-left"></i> Departures</a>
+    <div>
+      <h2>Check-out: Maria Garcia</h2>
+      <p>#RES-0002 · Room 305 Suite · 1 night · Due: 11:00 AM (Overdue 8 min)</p>
+    </div>
+    <a routerLink="/check-out/complete" class="settle-btn"><i class="bi bi-cash-coin"></i> Settle & Check Out</a>
+  </header>
+
+  <div class="layout-grid">
+    <article class="panel folio-panel">
+      <h3>Folio #FOLIO-0002</h3>
+      <p class="subline">Maria Garcia · Room 305 Suite · 28 May - 29 May 2026</p>
+
+      <div class="section-heading">Room Charges</div>
+      <div class="line-item head-row">
+        <span>28 May (Wed)</span><span>Suite 305 - Standard Rate</span><strong>$220.00</strong>
+      </div>
+      <div class="line-item total-row">
+        <span>Room subtotal</span><strong>$220.00</strong>
+      </div>
+
+      <div class="section-heading">Additional Charges</div>
+      <div class="line-item" *ngFor="let item of lineItems">
+        <span>{{ item.category }}</span>
+        <div>
+          {{ item.description }}
+          <small *ngIf="item.badge" class="mini-badge">{{ item.badge }}</small>
+        </div>
+        <strong>{{ item.amount }}</strong>
+      </div>
+
+      <div class="line-item total-row muted">
+        <span>Additional subtotal</span><strong>$356.90</strong>
+      </div>
+      <div class="line-item total-row muted">
+        <span>Subtotal (room + charges)</span><strong>$576.90</strong>
+      </div>
+      <div class="line-item total-row muted">
+        <span>Service Charge (10%)</span><strong>$57.69</strong>
+      </div>
+      <div class="line-item total-row muted">
+        <span>Tax - HST (13%)</span><strong>$82.59</strong>
+      </div>
+
+      <div class="grand-total">
+        <div>
+          <p>TOTAL DUE</p>
+          <small>Visa ending ••4892 on file</small>
+        </div>
+        <strong>$717.18</strong>
+      </div>
+
+      <div class="action-row">
+        <button type="button" class="secondary-btn">+ Add Charge</button>
+        <button type="button" class="secondary-btn warning">▲ Dispute Item</button>
+        <button type="button" class="secondary-btn success">% Apply Discount</button>
+      </div>
+
+      <div class="history-block">
+        <h4>Payment History</h4>
+        <div class="history-row">
+          <span>28 May 10:15</span>
+          <span>Pre-authorization hold</span>
+          <span class="pill blue">Pre-Auth</span>
+          <strong>$200.00</strong>
+        </div>
+        <div class="history-row">
+          <span>28 May 8:30 PM</span>
+          <span>Restaurant charge via room</span>
+          <span class="pill blue">Charged</span>
+          <strong>$67.50</strong>
+        </div>
+      </div>
+    </article>
+
+    <aside class="panel payment-panel">
+      <h3>Payment Settlement</h3>
+
+      <article class="guest-card">
+        <span class="avatar">MG</span>
+        <div>
+          <strong>Maria Garcia</strong>
+          <p>Silver Member · 5 stays</p>
+          <small>Due: 11:00 AM (Overdue)</small>
+        </div>
+      </article>
+
+      <article class="total-due">
+        <p>Total Due</p>
+        <strong>$717.18</strong>
+        <small>Includes service charge + tax</small>
+      </article>
+
+      <div class="section-heading">Payment Method</div>
+      <button type="button" class="method-row active" *ngFor="let payment of payments">
+        <i class="bi" [ngClass]="payment.iconClass"></i>
+        <span>{{ payment.label }}</span>
+      </button>
+
+      <div class="section-heading">Receipt Options</div>
+      <div class="split-row">
+        <button type="button" class="secondary-btn inline" *ngFor="let option of receiptOptions">
+          <i class="bi" [ngClass]="option.iconClass"></i> {{ option.label }}
+        </button>
+      </div>
+      <button type="button" class="green-btn"><i class="bi bi-send"></i> Send post-stay survey to guest</button>
+
+      <article class="points-card">
+        <h4>Points Earned This Stay</h4>
+        <p>★ 717 Silver Points</p>
+        <small>New balance: 3,407 · 600 more to Gold tier</small>
+      </article>
+
+      <a routerLink="/check-out/complete" class="settle-large">Settle $717.18 & Check Out</a>
+      <a routerLink="/check-out/queue" class="cancel-link">Cancel - Back to Queue</a>
+    </aside>
+  </div>
+</section>

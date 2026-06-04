@@ -1,0 +1,25 @@
+<article class="filters-card">
+  <div class="filter-row top-row">
+    <label class="field search"><i class="bi bi-search"></i> Search guest, room, conf#...</label>
+    <label class="field"><i class="bi bi-calendar3"></i> Check-in from</label>
+    <label class="field"><i class="bi bi-calendar3"></i> Check-in to</label>
+    <label class="field">Room Type ▾</label>
+    <label class="field">Status: All ▾</label>
+    <label class="field">Source: All ▾</label>
+  </div>
+
+  <div class="filter-row sub-row">
+    <label class="field small">Floor ▾</label>
+    <label class="field small">Rate Plan ▾</label>
+    <label class="field small">Payment ▾</label>
+    <label class="field small">Loyalty ▾</label>
+    <label class="field small">Nights: min</label>
+    <label class="field small">Nights: max</label>
+    <label class="field small">Amount: min</label>
+    <label class="field small">Amount: max</label>
+    <div class="filter-actions">
+      <button class="btn btn-muted" type="button" (click)="resetFilters.emit()">Reset All</button>
+      <button class="btn btn-primary" type="button" (click)="applyFilters.emit()">Apply Filters</button>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,104 @@
+<section class="rooms-page">
+  <div class="metrics-grid">
+    <article class="metric-card" *ngFor="let metric of metrics">
+      <p>{{ metric.label }}</p>
+      <h3>{{ metric.value }}</h3>
+      <small>{{ metric.helper }}</small>
+      <span class="metric-icon" [ngClass]="'tone-' + metric.tone">
+        <i class="bi" [ngClass]="metric.icon" aria-hidden="true"></i>
+      </span>
+    </article>
+  </div>
+
+  <section class="filter-bar">
+    <label class="field search-field">
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <input type="text" value="Search rooms..." aria-label="Search rooms" />
+    </label>
+    <label class="field">
+      <select aria-label="Filter by floor">
+        <option>Floor: All</option>
+      </select>
+    </label>
+    <label class="field">
+      <select aria-label="Filter by room type">
+        <option>Room Type: All</option>
+      </select>
+    </label>
+    <label class="field">
+      <select aria-label="Filter by status">
+        <option>Status: All</option>
+      </select>
+    </label>
+    <label class="field">
+      <select aria-label="Filter by housekeeping">
+        <option>Housekeeping: All</option>
+      </select>
+    </label>
+  </section>
+
+  <section class="room-tabs">
+    <button
+      type="button"
+      class="room-tab"
+      [class.active]="tab.active"
+      *ngFor="let tab of roomTabs"
+    >
+      {{ tab.label }} ({{ tab.count }})
+    </button>
+  </section>
+
+  <article class="table-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ROOM #</th>
+            <th>TYPE</th>
+            <th>FLOOR</th>
+            <th>BEDS</th>
+            <th>RATE/NIGHT</th>
+            <th>STATUS</th>
+            <th>HOUSEKEEPING</th>
+            <th>CURRENT GUEST</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let room of rooms">
+            <td><strong>{{ room.roomNo }}</strong></td>
+            <td>{{ room.type }}</td>
+            <td>{{ room.floor }}</td>
+            <td>{{ room.beds }}</td>
+            <td class="rate">{{ room.rateNight }}</td>
+            <td>
+              <span class="chip status" [ngClass]="room.status.toLowerCase().replace(' ', '-')">
+                {{ room.status }}
+              </span>
+            </td>
+            <td>
+              <span class="chip housekeeping" [ngClass]="room.housekeeping.toLowerCase().replace(' ', '-')">
+                {{ room.housekeeping }}
+              </span>
+            </td>
+            <td>{{ room.currentGuest }}</td>
+            <td class="actions-col">
+              <button type="button" class="mini-btn edit">Edit</button>
+              <button type="button" class="mini-btn view">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <small>Showing 1-10 of 42 rooms</small>
+      <div class="pager">
+        <button type="button" class="page-btn active">1</button>
+        <button type="button" class="page-btn">2</button>
+        <button type="button" class="page-btn">3</button>
+        <button type="button" class="page-btn">4</button>
+      </div>
+    </footer>
+  </article>
+</section>

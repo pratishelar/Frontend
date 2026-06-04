@@ -1,0 +1,103 @@
+<section class="reservation-flow">
+  <div class="stepper">
+    <div *ngFor="let step of steps; let index = index" class="step-item" [class.active]="step.active" [class.done]="step.done">
+      <span class="step-badge">{{ index + 1 }}</span>
+      <span>{{ step.label }}</span>
+      <i class="step-line" *ngIf="index < steps.length - 1"></i>
+    </div>
+  </div>
+
+  <div class="hero-banner">
+    <div>
+      <h3>Reservation Confirmed!</h3>
+      <p>Reference #RES-2026-0049 · Created by PS · 01 Jun 2026, 10:24 AM</p>
+    </div>
+  </div>
+
+  <div class="layout-grid confirm-grid">
+    <article class="panel main-panel">
+      <header class="reservation-header">
+        <h3>Reservation #RES-2026-0049</h3>
+        <span class="status-pill">✓ Confirmed</span>
+      </header>
+
+      <div class="info-grid">
+        <div>
+          <h4>Guest</h4>
+          <div class="guest-card">
+            <span class="avatar">JS</span>
+            <div>
+              <strong>John Smith</strong>
+              <p>Gold Member · 12 stays · 1,013 pts earned</p>
+              <small>john.smith&#64;email.com · +1 416 555 0123</small>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4>Rate Breakdown</h4>
+          <div class="line-list">
+            <div><span>Fri 29 May (Weekend)</span><strong>$220.00</strong></div>
+            <div><span>Sat 30 May (Weekend)</span><strong>$220.00</strong></div>
+            <div><span>Sun 31 May (Weekday)</span><strong>$170.00</strong></div>
+            <div><span>Mon 01 Jun (Weekday)</span><strong>$170.00</strong></div>
+            <div><span>Valet Parking (4 nights)</span><strong>$100.00</strong></div>
+            <div><span>Welcome Amenity (1x)</span><strong>$65.00</strong></div>
+            <div class="total-row"><span>Subtotal</span><strong>$945.00</strong></div>
+            <div class="total-row"><span>Gold Member (5% off)</span><strong class="success">-$47.25</strong></div>
+            <div class="total-row"><span>Tax (13% HST)</span><strong>$114.98</strong></div>
+          </div>
+          <div class="grand-total"><span>Total Paid</span><strong>$1,012.73</strong></div>
+          <div class="payment-banner">Visa ending ••4242 · Paid in Full</div>
+          <small>Receipt sent to john.smith&#64;email.com</small>
+        </div>
+      </div>
+
+      <section class="notes-box">
+        <h4>Special Requests</h4>
+        <p>Late check-in (~10 PM) · Quiet room away from elevator</p>
+        <p>Vegetarian diet · Soft pillows preferred</p>
+      </section>
+
+      <section class="notes-box warning">
+        <h4>Cancellation</h4>
+        <p>Free cancellation until 28 May 2026, 3:00 PM</p>
+        <p>After that: 1 night charge applies</p>
+      </section>
+
+      <div class="action-row">
+        <button type="button" class="ghost-btn">Print</button>
+        <button type="button" class="ghost-btn">Email Guest</button>
+        <a routerLink="/reservations" class="ghost-btn blue">View Reservation</a>
+        <a routerLink="/check-in/queue" class="primary-btn green">Check In Now</a>
+        <a routerLink="/reservations/step-1-guest" class="primary-btn">+ New Reservation</a>
+      </div>
+    </article>
+
+    <aside class="panel summary-panel">
+      <h3>Pre-arrival Checklist</h3>
+      <div class="checklist">
+        <div *ngFor="let item of checklist" class="check-row">
+          <span class="check-box" [class.done]="item.done">{{ item.done ? '✓' : '' }}</span>
+          <span [class.muted]="!item.done">{{ item.text }}</span>
+        </div>
+      </div>
+
+      <section class="notes-box staff-note">
+        <h4>Guest Notes (staff only)</h4>
+        <p>VIP — 12th stay. Prefers high floor, quiet room.</p>
+        <p>Vegetarian. Soft pillows. Late check-in expected.</p>
+      </section>
+
+      <section class="housekeeping-box">
+        <h4>Housekeeping</h4>
+        <div class="hk-banner">Room 201 assigned to AM crew · Ready by 2:00 PM</div>
+        <div class="hk-banner alt">Welcome amenity to be placed before arrival</div>
+      </section>
+
+      <div class="mobile-actions">
+        <a routerLink="/reservations" class="ghost-btn">Done - Back to Reservations</a>
+      </div>
+    </aside>
+  </div>
+</section>

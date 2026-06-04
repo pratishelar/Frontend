@@ -1,0 +1,93 @@
+<section class="calendar-page">
+  <article class="timeline-card">
+    <div class="toolbar-row">
+      <div class="date-range">
+        <button type="button" class="nav-btn" (click)="shiftRange(-1)">‹</button>
+        <strong>{{ rangeLabel }}</strong>
+        <button type="button" class="nav-btn" (click)="shiftRange(1)">›</button>
+      </div>
+
+      <div class="period-switch">
+        <button type="button" [class.active]="isTodayRange" (click)="goToToday()">Today</button>
+        <button type="button" [class.active]="viewMode === '2weeks'" (click)="setViewMode('2weeks')">2 Weeks</button>
+        <button type="button" [class.active]="viewMode === 'month'" (click)="setViewMode('month')">Month</button>
+      </div>
+
+      <div class="filters-inline">
+        <button type="button">Floor: All ▾</button>
+        <button type="button">Type: All ▾</button>
+        <button type="button">Status: All ▾</button>
+      </div>
+
+      <div class="counts-inline">
+        <span class="ok">Available: 22</span>
+        <span class="booked">Occupied: 13</span>
+        <span class="hold">Cleaning: 5</span>
+        <span class="bad">OOO: 2</span>
+      </div>
+    </div>
+
+    <div class="timeline-wrap" [style.--day-count]="dayCount">
+      <div class="timeline-head">
+        <div class="room-head">ROOM / TYPE</div>
+        <div class="day-head" *ngFor="let day of days" [class.today]="day.today" [class.weekend]="day.weekend">
+          <small *ngIf="day.month">{{ day.month }}</small>
+          <strong>{{ day.date }}</strong>
+          <span>{{ day.day }}</span>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let floor of floors">
+        <div class="floor-band">{{ floor.label }}</div>
+
+        <div class="room-row" *ngFor="let room of floor.rooms">
+          <div class="room-meta">
+            <div class="room-main">
+              <strong [class.alert]="room.alert">{{ room.no }}</strong>
+              <small>{{ room.type }}</small>
+            </div>
+            <em>{{ room.rate }}</em>
+          </div>
+
+          <div class="row-grid">
+            <div class="day-cell" *ngFor="let day of days" [class.weekend]="day.weekend"></div>
+
+            <div
+              class="stay-bar"
+              *ngFor="let bar of barsFor(room)"
+              [ngClass]="bar.tone"
+              [style.--start]="bar.start"
+              [style.--span]="bar.span"
+            >
+              {{ bar.label }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="legend-row">
+      <strong>Legend:</strong>
+      <span><i class="swatch occupied"></i>Occupied / Booking</span>
+      <span><i class="swatch confirmed"></i>Confirmed (upcoming)</span>
+      <span><i class="swatch vip"></i>Gold / VIP Member</span>
+      <span><i class="swatch hold"></i>Cleaning / Hold</span>
+      <span><i class="swatch ooo"></i>Out of Order</span>
+      <span class="check-legend"><i class="swatch today"></i>Today</span>
+      <span class="check-legend"><i class="swatch weekend"></i>Weekend</span>
+    </div>
+
+    <footer class="summary-row">
+      <strong>Today - 29 May 2026</strong>
+      <div class="occ-meter">
+        <span></span>
+      </div>
+      <small>62% occupied</small>
+      <span class="stat">4 <small>Arrivals</small></span>
+      <span class="stat">3 <small>Departures</small></span>
+      <span class="stat">3.2 nts <small>Avg Stay</small></span>
+      <span class="stat">$116 <small>RevPAR</small></span>
+      <span class="stat">$187 <small>ADR</small></span>
+    </footer>
+  </article>
+</section>

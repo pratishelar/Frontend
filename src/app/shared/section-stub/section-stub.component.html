@@ -1,0 +1,9 @@
+<section class="stub-card">
+  <h2>{{ title() }}</h2>
+  <p>{{ subtitle() }}</p>
+
+  <h3>Next Build Steps</h3>
+  <ol>
+    <li *ngFor="let step of nextSteps()">{{ step }}</li>
+  </ol>
+</section>

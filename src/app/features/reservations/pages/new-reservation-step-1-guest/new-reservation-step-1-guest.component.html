@@ -1,0 +1,87 @@
+<section class="reservation-flow">
+  <div class="stepper">
+    <div *ngFor="let step of steps; let index = index" class="step-item" [class.active]="step.active" [class.done]="step.done">
+      <span class="step-badge">{{ index + 1 }}</span>
+      <span>{{ step.label }}</span>
+      <i class="step-line" *ngIf="index < steps.length - 1"></i>
+    </div>
+  </div>
+
+  <div class="layout-grid">
+    <article class="panel form-panel">
+      <h3>Guest Information</h3>
+
+      <div class="section-title">Search Existing Guest</div>
+      <div class="search-row">
+        <div class="search-input"><i class="bi bi-search"></i> Search by name, email or phone...</div>
+        <button type="button" class="primary-inline">+ Create New Guest</button>
+      </div>
+      <p class="helper">or select from results below</p>
+
+      <div class="guest-list">
+        <article class="guest-row active" *ngFor="let guest of guestCards; let isFirst = first">
+          <div class="guest-left">
+            <span class="avatar">{{ guest.initials }}</span>
+            <div>
+              <strong>{{ guest.name }}</strong>
+              <p>{{ guest.details }}</p>
+              <small>{{ guest.tag }}</small>
+            </div>
+          </div>
+          <button type="button" class="row-cta" [class.selected]="isFirst">{{ isFirst ? '✓' : 'Select' }}</button>
+        </article>
+
+        <article class="guest-row walkin">
+          <div class="guest-left">
+            <span class="avatar neutral">👤</span>
+            <div>
+              <strong>Walk-in Guest (no profile)</strong>
+              <p>Create a temporary booking without a guest profile</p>
+            </div>
+          </div>
+          <button type="button" class="row-cta">Use</button>
+        </article>
+      </div>
+
+      <footer class="panel-footer">
+        <div></div>
+        <a routerLink="/reservations/step-2-room-dates" class="primary-btn">Next: Room & Dates →</a>
+      </footer>
+    </article>
+
+    <aside class="panel summary-panel">
+      <h3>Booking Summary</h3>
+
+      <article class="guest-summary-card">
+        <span class="avatar">JS</span>
+        <div>
+          <strong>John Smith</strong>
+          <p>Gold Member · 12 stays</p>
+        </div>
+      </article>
+
+      <div class="summary-grid">
+        <div *ngFor="let item of bookingSummary">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </div>
+      </div>
+
+      <section class="summary-section recent-stays">
+        <h4>Last 2 Stays</h4>
+        <div class="stay-row">
+          <span>305 Suite</span>
+          <span>12–15 Apr 2026</span>
+          <strong>$1,047</strong>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="stay-row">
+          <span>201 Deluxe</span>
+          <span>14–17 Jan 2026</span>
+          <strong>$837</strong>
+          <span class="stars">★★★★★</span>
+        </div>
+      </section>
+    </aside>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+<section class="reservation-flow">
+  <div class="stepper">
+    <div *ngFor="let step of steps; let index = index" class="step-item" [class.active]="step.active" [class.done]="step.done">
+      <span class="step-badge">{{ index + 1 }}</span>
+      <span>{{ step.label }}</span>
+      <i class="step-line" *ngIf="index < steps.length - 1"></i>
+    </div>
+  </div>
+
+  <div class="layout-grid">
+    <article class="panel main-panel">
+      <h3>Rate Plan</h3>
+
+      <div class="rate-grid">
+        <article class="rate-card" *ngFor="let plan of ratePlans" [class.selected]="plan.selected">
+          <div class="rate-head">
+            <label><input type="radio" name="ratePlan" [checked]="plan.selected" /> {{ plan.name }}</label>
+            <span class="badge" *ngIf="plan.badge">{{ plan.badge }}</span>
+          </div>
+          <small>{{ plan.label }}</small>
+          <p>{{ plan.note }}</p>
+          <div class="rate-meta">
+            <strong>Weekday: {{ plan.weekday }}</strong>
+            <strong>Weekend: {{ plan.weekend }}</strong>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-title">Nightly Rate Preview</div>
+      <table class="preview-table">
+        <thead><tr><th>Date</th><th>Type</th><th>Rate</th><th>Applied Plan</th></tr></thead>
+        <tbody>
+          <tr><td>Fri 29 May</td><td><span class="pill weekend">Weekend</span></td><td>$220</td><td>Standard Rate</td></tr>
+          <tr><td>Sat 30 May</td><td><span class="pill weekend">Weekend</span></td><td>$220</td><td>Standard Rate</td></tr>
+          <tr><td>Sun 31 May</td><td><span class="pill weekday">Weekday</span></td><td>$170</td><td>Standard Rate</td></tr>
+          <tr><td>Mon 01 Jun</td><td><span class="pill weekday">Weekday</span></td><td>$170</td><td>Standard Rate</td></tr>
+        </tbody>
+      </table>
+      <div class="subtotal-row"><span>Subtotal (4 nights)</span><strong>$780.00</strong></div>
+
+      <div class="section-title">Add-ons & Extras</div>
+      <div class="addon-grid">
+        <label class="addon-card" *ngFor="let addOn of addOns" [class.selected]="addOn.selected">
+          <div class="addon-top">
+            <span class="check-box">{{ addOn.selected ? '✓' : '' }}</span>
+            <div>
+              <strong>{{ addOn.name }}</strong>
+              <p>{{ addOn.description }}</p>
+            </div>
+            <b>{{ addOn.price }}</b>
+          </div>
+        </label>
+      </div>
+
+      <div class="promo-row">
+        <label><span>Promo / Rate Code</span><input type="text" placeholder="Enter code" /></label>
+        <button type="button" class="primary-inline">Apply</button>
+        <div class="saved-codes">
+          <span>Saved:</span>
+          <button type="button" *ngFor="let code of savedCodes">{{ code }}</button>
+        </div>
+      </div>
+
+      <footer class="panel-footer">
+        <a routerLink="/reservations/step-2-room-dates" class="ghost-btn">← Back: Room & Dates</a>
+        <a routerLink="/reservations/step-4-payment" class="primary-btn">Next: Payment →</a>
+      </footer>
+    </article>
+
+    <aside class="panel summary-panel">
+      <h3>Booking Summary</h3>
+      <article class="guest-summary-card">
+        <span class="avatar">JS</span>
+        <div>
+          <strong>John Smith</strong>
+          <p>Gold Member</p>
+        </div>
+      </article>
+      <div class="summary-grid">
+        <div *ngFor="let item of bookingSummary">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </div>
+      </div>
+      <div class="breakdown-list">
+        <div><span>Fri 29 May (Weekend)</span><strong>$220</strong></div>
+        <div><span>Sat 30 May (Weekend)</span><strong>$220</strong></div>
+        <div><span>Sun 31 May (Weekday)</span><strong>$170</strong></div>
+        <div><span>Mon 01 Jun (Weekday)</span><strong>$170</strong></div>
+        <div><span>Add-ons (Valet + Amenity)</span><strong>+$165</strong></div>
+      </div>
+      <div class="total-line">
+        <span>Total</span>
+        <strong>$1,012.73</strong>
+      </div>
+      <div class="availability-summary">✓ Room 201 available · No conflicts</div>
+    </aside>
+  </div>
+</section>

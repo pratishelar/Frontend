@@ -1,0 +1,86 @@
+<article class="table-card">
+  <div class="table-wrap">
+    <table class="reservations-table">
+      <thead>
+        <tr>
+          <th>Conf #</th>
+          <th>Guest</th>
+          <th>Room</th>
+          <th class="align-center">Check-in</th>
+          <th class="align-center">Check-out</th>
+          <th class="align-center">Nights</th>
+          <th class="align-right">Amount</th>
+          <th>Payment</th>
+          <th>Status</th>
+          <th>Source</th>
+          <th>Rate Plan</th>
+          <th class="align-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td><button type="button" class="text-link">{{ reservation.confNo }}</button></td>
+          <td>
+            <div class="guest-cell">
+              <span class="avatar">{{ reservation.initials }}</span>
+              <div>
+                <p>{{ reservation.guest }}</p>
+                <small>{{ reservation.email }}</small>
+              </div>
+            </div>
+          </td>
+          <td>{{ reservation.room }}</td>
+          <td class="align-center">{{ reservation.checkIn }}</td>
+          <td class="align-center">{{ reservation.checkOut }}</td>
+          <td class="align-center">{{ reservation.nights }}</td>
+          <td class="amount align-right">{{ reservation.amount }}</td>
+          <td>
+            <span class="chip payment" [ngClass]="reservation.payment.toLowerCase().replace(' ', '-')">{{ reservation.payment }}</span>
+          </td>
+          <td>
+            <span class="chip status" [ngClass]="reservation.status.toLowerCase().replace(' ', '-')">{{ reservation.status }}</span>
+          </td>
+          <td>{{ reservation.source }}</td>
+          <td>{{ reservation.ratePlan }}</td>
+          <td class="align-center">
+            <div class="dropdown-wrap">
+              <button
+                type="button"
+                class="menu-btn"
+                (click)="toggleMenu(reservation.confNo, $event)"
+                [attr.aria-label]="'Actions for ' + reservation.guest"
+              >⋯</button>
+              <ul
+                *ngIf="openMenuConf === reservation.confNo"
+                class="dropdown-menu"
+                role="menu"
+              >
+                <li
+                  *ngFor="let action of actionsFor(reservation.status)"
+                  class="dropdown-item"
+                  [ngClass]="'tone-' + action.tone"
+                  (click)="navigate(action.route)"
+                  role="menuitem"
+                >
+                  <i class="bi" [ngClass]="action.icon" aria-hidden="true"></i>
+                  {{ action.label }}
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-table-pagination
+    [summary]="summary"
+    [pageSizes]="pageSizes"
+    [selectedPageSize]="selectedPageSize"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageSizeChange)="pageSizeChange.emit($event)"
+    (previousPage)="previousPage.emit()"
+    (nextPage)="nextPage.emit()"
+  />
+</article>

@@ -1,0 +1,140 @@
+<section class="reservation-flow">
+  <div class="stepper">
+    <div *ngFor="let step of steps; let index = index" class="step-item" [class.active]="step.active" [class.done]="step.done">
+      <span class="step-badge">{{ index + 1 }}</span>
+      <span>{{ step.label }}</span>
+      <i class="step-line" *ngIf="index < steps.length - 1"></i>
+    </div>
+  </div>
+
+  <div class="layout-grid">
+    <article class="panel main-panel">
+      <h3>Stay Details</h3>
+
+      <div class="grid-2 dates-row">
+        <label><span>Check-in Date *</span><input type="text" value="Friday, 29 May 2026" /></label>
+        <label><span>Check-out Date *</span><input type="text" value="Tuesday, 02 June 2026 (4 nights)" /></label>
+      </div>
+
+      <div class="availability-bar">📅 4 nights selected · 29 May (Fri) → 02 Jun (Tue) <a href="#">Modify dates</a></div>
+
+      <div class="calendar-card">
+        <div class="calendar-head">
+          <button type="button">‹</button>
+          <strong>May 2026</strong>
+          <button type="button">›</button>
+        </div>
+        <div class="calendar-grid">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+          <button type="button" class="day muted">4</button>
+          <button type="button" class="day muted">5</button>
+          <button type="button" class="day muted">6</button>
+          <button type="button" class="day muted">7</button>
+          <button type="button" class="day muted">1</button>
+          <button type="button" class="day muted">2</button>
+          <button type="button" class="day muted">3</button>
+          <button type="button" class="day muted">11</button>
+          <button type="button" class="day muted">12</button>
+          <button type="button" class="day muted">13</button>
+          <button type="button" class="day muted">14</button>
+          <button type="button" class="day muted">15</button>
+          <button type="button" class="day muted">16</button>
+          <button type="button" class="day muted">17</button>
+          <button type="button" class="day muted">18</button>
+          <button type="button" class="day muted">19</button>
+          <button type="button" class="day muted">20</button>
+          <button type="button" class="day muted">21</button>
+          <button type="button" class="day muted">22</button>
+          <button type="button" class="day muted">23</button>
+          <button type="button" class="day muted">24</button>
+          <button type="button" class="day muted">25</button>
+          <button type="button" class="day muted">26</button>
+          <button type="button" class="day muted">27</button>
+          <button type="button" class="day muted">28</button>
+          <button type="button" class="day selected">29</button>
+          <button type="button" class="day selected">30</button>
+          <button type="button" class="day selected">31</button>
+        </div>
+      </div>
+
+      <div class="room-type-grid">
+        <article class="room-type-card" *ngFor="let roomType of roomTypes" [class.selected]="roomType.selected">
+          <div class="room-card-top">
+            <label><input type="radio" name="roomType" [checked]="roomType.selected" /> {{ roomType.name }}</label>
+            <span class="badge" *ngIf="roomType.selected">✓</span>
+          </div>
+          <small>{{ roomType.label }}</small>
+          <div class="room-meta">
+            <span>{{ roomType.availability }}</span>
+            <strong>{{ roomType.rate }}</strong>
+          </div>
+          <span class="corner-badge" *ngIf="roomType.selected">Selected</span>
+        </article>
+      </div>
+
+      <div class="grid-3 select-row">
+        <label><span>Room Number *</span><input type="text" value="201 - Deluxe King" /></label>
+        <label><span>Room View</span><input type="text" value="City View" /></label>
+        <label><span>Notes</span><input type="text" placeholder="VIP, quiet floor, connecting room..." /></label>
+      </div>
+
+      <div class="availability-ok">✓ Room 201 available 29 May – 02 Jun 2026 · No conflicts found</div>
+
+      <div class="grid-5 occupancy-row">
+        <label><span>Adults *</span><input type="text" value="2" /></label>
+        <label><span>Children</span><input type="text" value="0" /></label>
+        <label><span>Infants</span><input type="text" value="0" /></label>
+        <label><span>Booking Source *</span><input type="text" value="Direct / Front Desk" /></label>
+        <label><span>Company / Group</span><input type="text" placeholder="Optional" /></label>
+      </div>
+
+      <label class="notes-block">
+        <span>Special Requests</span>
+        <textarea rows="4" placeholder="Late check-in, dietary requirements, accessibility needs, room preferences..."></textarea>
+      </label>
+
+      <footer class="panel-footer">
+        <a routerLink="/reservations/step-1-guest" class="ghost-btn">← Back: Guest</a>
+        <a routerLink="/reservations/step-3-rates-addons" class="primary-btn">Next: Rates & Add-ons →</a>
+      </footer>
+    </article>
+
+    <aside class="panel summary-panel">
+      <h3>Booking Summary</h3>
+      <article class="guest-summary-card">
+        <span class="avatar">JS</span>
+        <div>
+          <strong>John Smith</strong>
+          <p>Gold Member</p>
+        </div>
+      </article>
+      <div class="summary-grid">
+        <div *ngFor="let item of bookingSummary">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </div>
+      </div>
+      <div class="checklist-card">
+        <div class="checklist-row">
+          <span>Room</span><strong>201 - Deluxe King</strong>
+        </div>
+        <div class="checklist-row">
+          <span>Check-in</span><strong>Fri, 29 May 2026</strong>
+        </div>
+        <div class="checklist-row">
+          <span>Check-out</span><strong>Tue, 02 Jun 2026</strong>
+        </div>
+        <div class="checklist-row">
+          <span>Duration</span><strong>4 nights</strong>
+        </div>
+        <div class="checklist-row">
+          <span>Guests</span><strong>2 Adults</strong>
+        </div>
+        <div class="checklist-row">
+          <span>Source</span><strong>Direct / Front Desk</strong>
+        </div>
+      </div>
+      <div class="availability-summary">✓ Room 201 available · No conflicts</div>
+    </aside>
+  </div>
+</section>

@@ -1,0 +1,118 @@
+<section class="verify-page">
+  <header class="flow-head">
+    <a routerLink="/check-in/queue" class="back-link"><i class="bi bi-arrow-left"></i> Arrivals Queue</a>
+    <div class="steps" aria-label="Check-in progress">
+      <span class="active"><i class="bi bi-1-circle-fill"></i> Verify Guest</span>
+      <span><i class="bi bi-2-circle"></i> Assign Room</span>
+      <span><i class="bi bi-3-circle"></i> Complete</span>
+    </div>
+  </header>
+
+  <div class="layout-grid">
+    <article class="panel guest-panel">
+      <h3>Guest Identity Verification</h3>
+
+      <div class="guest-head">
+        <span class="avatar">JS</span>
+        <div>
+          <strong>John Smith</strong>
+          <p>john.smith&#64;email.com • +1 416 555 0123</p>
+          <small><span class="chip">Gold Member</span> 12 stays • $4,820 lifetime value</small>
+        </div>
+        <button type="button" class="id-ok"><i class="bi bi-check-lg"></i> ID OK</button>
+      </div>
+
+      <div class="form-row">
+        <label>
+          Passport / ID Number
+          <input type="text" value="AB1234567" />
+        </label>
+        <label>
+          Expiry Date
+          <input type="text" value="09/2030" />
+        </label>
+        <label>
+          Nationality
+          <input type="text" value="Canada 🇨🇦" />
+        </label>
+      </div>
+
+      <button type="button" class="scan-btn"><i class="bi bi-camera"></i> Scan Passport / ID Card</button>
+
+      <section class="info-block">
+        <h4>Reservation Details</h4>
+        <div class="kv-grid">
+          <p>Confirmation #</p><strong>#RES-2026-0049</strong>
+          <p>Check-in</p><strong>Friday, 29 May 2026</strong>
+          <p>Check-out</p><strong>Tuesday, 02 June 2026</strong>
+          <p>Duration</p><strong>4 nights</strong>
+          <p>Adults / Children</p><strong>2 Adults, 0 Children</strong>
+          <p>Rate Plan</p><strong>Standard Rate - Flexible</strong>
+          <p>Total Charge</p><strong class="paid">$1,012.73 (Paid via Visa ••4242)</strong>
+        </div>
+      </section>
+
+      <section class="notice warning">
+        Late check-in (~10 PM) · Quiet room away from elevator · Vegetarian diet · Soft pillows · High floor preferred
+      </section>
+
+      <section class="notice success">
+        <i class="bi bi-check-lg"></i> Pre-authorization of $200 completed · Visa ••4242
+      </section>
+
+      <section class="notice info">
+        <i class="bi bi-chevron-down"></i> Room 201 inspected and cleared by HK crew — 12:30 PM
+      </section>
+
+      <footer class="panel-actions">
+        <a routerLink="/check-in/queue" class="ghost-btn"><i class="bi bi-arrow-left"></i> Back to Queue</a>
+        <a routerLink="/check-in/complete" class="primary-btn">Next: Assign Room <i class="bi bi-arrow-right"></i></a>
+      </footer>
+    </article>
+
+    <aside class="panel assign-panel">
+      <h3>Room Assignment</h3>
+      <article class="room-card">
+        <div>
+          <strong>201</strong>
+          <p>Deluxe King</p>
+          <small>Floor 2 · City View · 1 King Bed</small>
+        </div>
+        <span class="ready-chip"><i class="bi bi-check-lg"></i> Ready</span>
+      </article>
+
+      <button type="button" class="ghost-control">Change Room</button>
+
+      <article class="upgrade-card">
+        <h4>Upgrade Available</h4>
+        <p>301 - Junior Suite</p>
+        <small>+ $100 for 4 nights [$25/nt]</small>
+        <button type="button">Offer Upgrade</button>
+      </article>
+
+      <section class="keys">
+        <h4>Key Cards</h4>
+        <p>Number of keys to issue:</p>
+        <div class="key-options">
+          <button type="button">1</button>
+          <button type="button" class="active">2</button>
+          <button type="button">3</button>
+        </div>
+      </section>
+
+      <article class="key-preview">
+        <small>GRAND HOTEL</small>
+        <strong>201</strong>
+        <p>Deluxe King · Floor 2</p>
+      </article>
+
+      <label class="note-box">
+        Welcome Note (optional)
+        <textarea rows="3">Welcome back, John! Your room is ready. Enjoy your stay!</textarea>
+      </label>
+
+      <a routerLink="/check-in/complete" class="complete-btn"><i class="bi bi-check-lg"></i> Complete Check-in</a>
+      <button type="button" class="cancel-btn">Cancel Check-in</button>
+    </aside>
+  </div>
+</section>

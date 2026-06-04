@@ -1,0 +1,24 @@
+<section class="reservations-page">
+  <app-reservations-filters
+    (applyFilters)="onApplyFilters()"
+    (resetFilters)="onResetFilters()"
+  />
+
+  <app-reservations-tabs
+    [tabs]="tabs"
+    [activeTab]="activeTab"
+    (tabChange)="activeTab = $event"
+  />
+
+  <app-reservations-table
+    [reservations]="reservations"
+    [pageSizes]="pageSizes"
+    [selectedPageSize]="selectedPageSize"
+    [summary]="summary"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (previousPage)="onPreviousPage()"
+    (nextPage)="onNextPage()"
+  />
+</section>

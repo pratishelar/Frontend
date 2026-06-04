@@ -1,0 +1,90 @@
+<section class="checkin-page">
+  <div class="stats-grid">
+    <article class="stat-card" *ngFor="let stat of stats" [ngClass]="'tone-' + stat.tone">
+      <div>
+        <p>{{ stat.title }}</p>
+        <strong>{{ stat.value }}</strong>
+        <small>{{ stat.subtitle }}</small>
+      </div>
+      <span class="stat-icon"><i class="bi" [ngClass]="stat.iconClass"></i></span>
+    </article>
+  </div>
+
+  <article class="filters-card">
+    <div class="filters-row">
+      <div class="field wide"><i class="bi bi-search"></i> Search guest, room, conf#...</div>
+      <div class="field">ETA <i class="bi bi-chevron-down"></i></div>
+      <div class="field">Room Type <i class="bi bi-chevron-down"></i></div>
+      <div class="field">Status <i class="bi bi-chevron-down"></i></div>
+      <div class="field">Floor <i class="bi bi-chevron-down"></i></div>
+      <div class="field text-only">Sorted by ETA</div>
+      <button type="button" class="outline-btn">Print All Arrivals</button>
+    </div>
+  </article>
+
+  <article class="tabs-card">
+    <button
+      type="button"
+      class="tab"
+      *ngFor="let tab of tabs"
+      [class.active]="tab === activeTab"
+    >
+      {{ tab }}
+    </button>
+  </article>
+
+  <article class="table-card">
+    <div class="table-wrap">
+      <table class="arrivals-table">
+        <thead>
+          <tr>
+            <th>Conf #</th>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>ETA</th>
+            <th>Nights</th>
+            <th>Amount</th>
+            <th>Rate Plan</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows">
+            <td><a routerLink="/check-in/verify-assign" class="conf-link">{{ row.confNo }}</a></td>
+            <td>
+              <div class="guest-cell">
+                <span class="avatar">{{ row.initials }}</span>
+                <div>
+                  <p>{{ row.guest }}</p>
+                  <small>{{ row.tier }}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="room-main">{{ row.room }}</p>
+              <small>{{ row.roomType }}</small>
+            </td>
+            <td>{{ row.eta }}</td>
+            <td>{{ row.nights }}</td>
+            <td class="amount">{{ row.amount }}</td>
+            <td>{{ row.ratePlan }}</td>
+            <td class="note">{{ row.notes }}</td>
+            <td>
+              <span class="status-chip" [ngClass]="statusClass(row.status)">{{ row.status }}</span>
+            </td>
+            <td>
+              <a routerLink="/check-in/verify-assign" class="checkin-btn"><i class="bi bi-check-lg"></i> Check In</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <p>Showing 9 pending of 12 total arrivals today</p>
+      <p class="ok">3 already checked in</p>
+    </footer>
+  </article>
+</section>

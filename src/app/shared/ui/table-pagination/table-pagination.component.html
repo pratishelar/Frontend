@@ -1,0 +1,25 @@
+<footer class="table-footer">
+  <p class="footer-summary">{{ summary }}</p>
+  <div class="footer-controls">
+    <label class="rows-label" for="rowsPerPage">Rows per page</label>
+    <select
+      id="rowsPerPage"
+      [value]="selectedPageSize"
+      (change)="onPageSizeChange($any($event.target).value)"
+    >
+      <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+    </select>
+
+    <div class="pager">
+      <button type="button" class="pager-btn" [disabled]="!canPrevious" (click)="previousPage.emit()">
+        <i class="bi bi-chevron-left" aria-hidden="true"></i>
+        Previous
+      </button>
+      <span class="page-indicator">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button type="button" class="pager-btn pager-btn-next" [disabled]="!canNext" (click)="nextPage.emit()">
+        Next
+        <i class="bi bi-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</footer>

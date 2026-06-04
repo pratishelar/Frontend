@@ -1,0 +1,403 @@
+.reservation-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.flow-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.flow-head h2 {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.head-actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ghost-btn,
+.primary-btn {
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.ghost-btn {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--text-2);
+}
+
+.primary-btn {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  align-items: center;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.step-item.active {
+  color: #1e293b;
+}
+
+.step-item.done {
+  color: #16a34a;
+}
+
+.step-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dbeafe;
+  color: #3b82f6;
+  font-size: 9px;
+}
+
+.step-item.active .step-badge {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.step-item.done .step-badge {
+  background: #16a34a;
+  color: #fff;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 10px;
+}
+
+.panel {
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 14px;
+}
+
+.panel h3,
+.section-title {
+  margin: 0;
+  color: var(--text-1);
+}
+
+.payment-tabs {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payment-tabs button {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 6px;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+
+.payment-tabs button.active {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #c2410c;
+}
+
+.card-preview {
+  margin-top: 10px;
+  background: #1d4ed8;
+  color: #fff;
+  border-radius: 10px;
+  min-height: 84px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.card-preview small,
+.card-preview p {
+  margin: 0;
+  font-size: 9px;
+}
+
+.card-preview strong {
+  display: block;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  margin: 10px 0 4px;
+}
+
+.card-preview span {
+  font-weight: 700;
+}
+
+.section-title {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.grid-3,
+.grid-4 {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.grid-3 {
+  grid-template-columns: 1.4fr 1fr 1fr;
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+label {
+  display: grid;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+
+label.wide {
+  grid-column: 1 / -1;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--text-1);
+  background: #fff;
+}
+
+.same-as {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.plan-grid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.plan-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.plan-card.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.plan-card label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.plan-card p {
+  margin: 6px 0 0;
+  font-size: 9px;
+  color: var(--text-2);
+}
+
+.security-note {
+  margin-top: 10px;
+  background: #ecfdf3;
+  color: #166534;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 10px;
+}
+
+.panel-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-panel {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.guest-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.guest-summary-card strong,
+.guest-summary-card p {
+  margin: 0;
+}
+
+.guest-summary-card p {
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.summary-grid,
+.breakdown-list {
+  display: grid;
+  gap: 8px;
+}
+
+.summary-grid {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.summary-grid span,
+.breakdown-list span {
+  color: var(--text-3);
+  font-size: 9px;
+}
+
+.summary-grid strong,
+.breakdown-list strong {
+  color: var(--text-1);
+  font-size: 10px;
+}
+
+.breakdown-list {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+
+.breakdown-list div,
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.total-line {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px solid var(--text-1);
+}
+
+.success {
+  color: #16a34a !important;
+}
+
+.payment-banner {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.policy-card {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+}
+
+.policy-card strong,
+.policy-card p {
+  margin: 0;
+  font-size: 10px;
+}
+
+.policy-card p {
+  margin-top: 4px;
+}
+
+.policy-card.warning {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.policy-card.gold {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #c2410c;
+}
+
+@media (max-width: 1200px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-3,
+  .grid-4,
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stepper {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

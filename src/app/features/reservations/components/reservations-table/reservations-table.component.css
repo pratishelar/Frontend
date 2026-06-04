@@ -1,0 +1,219 @@
+.table-card {
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.reservations-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  min-width: 1100px;
+  background: #ffffff;
+}
+
+.reservations-table th,
+.reservations-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 11px 10px;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.reservations-table th {
+  background: #f8fafc;
+  color: var(--text-3);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.reservations-table td {
+  color: var(--text-1);
+  font-size: 11px;
+}
+
+.reservations-table tbody tr:nth-child(even) {
+  background: #fbfdff;
+}
+
+.reservations-table tbody tr:hover {
+  background: #f5f9ff;
+}
+
+.reservations-table th.align-center,
+.reservations-table td.align-center {
+  text-align: center;
+}
+
+.reservations-table th.align-right,
+.reservations-table td.align-right {
+  text-align: right;
+}
+
+.text-link {
+  color: var(--primary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.guest-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.guest-cell > div {
+  min-width: 0;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dbeafe;
+  color: #1e40af;
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.guest-cell p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.guest-cell small {
+  color: var(--text-3);
+  font-size: 9px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.amount {
+  font-weight: 700;
+}
+
+.chip {
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.payment.paid,
+.payment.refunded,
+.status.confirmed,
+.status.checked-in,
+.status.checked-out {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.payment.partially-paid,
+.payment.pending,
+.status.pending,
+.status.checkout-due,
+.status.no-show {
+  color: #92400e;
+  background: #fde68a;
+}
+
+.status.cancelled {
+  color: #b91c1c;
+  background: #fecaca;
+}
+
+.status.in-progress,
+.payment.invoiced {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.payment.deposit {
+  color: #0369a1;
+  background: #e0f2fe;
+}
+
+.dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-btn {
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  border-radius: 6px;
+  width: 28px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 200;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  min-width: 160px;
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-1);
+  transition: background 0.1s;
+}
+
+.dropdown-item:hover {
+  background: #f8fafc;
+}
+
+.dropdown-item.tone-green  { color: #166534; }
+.dropdown-item.tone-amber  { color: #c2410c; }
+.dropdown-item.tone-red    { color: #b91c1c; }
+.dropdown-item.tone-blue   { color: #1d4ed8; }
+.dropdown-item.tone-violet { color: #7c3aed; }
+.dropdown-item.tone-neutral{ color: var(--text-2); }
+
+@media (max-width: 700px) {
+  .reservations-table {
+    min-width: 920px;
+  }
+}

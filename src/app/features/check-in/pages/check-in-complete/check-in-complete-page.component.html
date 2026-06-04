@@ -1,0 +1,71 @@
+<section class="complete-page">
+  <header class="success-bar">
+    <div>
+      <h2><i class="bi bi-check-lg"></i> Check-in Successful!</h2>
+      <p>John Smith has been checked in to Room 201 · 29 May 2026, 2:14 PM</p>
+    </div>
+    <a routerLink="/check-in/queue" class="queue-btn">Next Guest in Queue <i class="bi bi-arrow-right"></i></a>
+  </header>
+
+  <div class="layout-grid">
+    <div class="left-col">
+      <article class="panel keycard">
+        <small>GRAND HOTEL PMS</small>
+        <strong>201</strong>
+        <p>Deluxe King · Floor 2 · City View</p>
+        <div class="guest-meta">
+          <div>
+            <span>Guest</span>
+            <p>John Smith · Gold Member</p>
+          </div>
+          <div>
+            <span>Check-out</span>
+            <p>Tue 02 Jun 2026</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel stay-info">
+        <h3>Stay Information</h3>
+        <div class="kv-grid">
+          <p>Room</p><strong>201 – Deluxe King, Floor 2, City View</strong>
+          <p>Check-in</p><strong>Today, Friday 29 May 2026 at 2:14 PM</strong>
+          <p>Check-out</p><strong>Tuesday, 02 June 2026 by 11:00 AM</strong>
+          <p>Duration</p><strong>4 nights</strong>
+          <p>Guests</p><strong>2 Adults</strong>
+          <p>Pre-authorized</p><strong>$200 – Visa ending ••4242</strong>
+          <p>Total Amount</p><strong class="paid">$1,012.73 – Fully paid</strong>
+        </div>
+      </article>
+
+      <article class="panel services">
+        <h3>Hotel Services</h3>
+        <div class="service-grid">
+          <div><i class="bi bi-cup-hot"></i><span>Restaurant</span><small>6 AM - 11 PM</small></div>
+          <div><i class="bi bi-water"></i><span>Pool & Spa</span><small>8 AM - 9 PM</small></div>
+          <div><i class="bi bi-car-front"></i><span>Valet Parking</span><small>Active</small></div>
+          <div><i class="bi bi-telephone"></i><span>Front Desk</span><small>Ext. 0</small></div>
+        </div>
+      </article>
+    </div>
+
+    <aside class="panel actions-panel">
+      <h3>Actions</h3>
+      <button
+        type="button"
+        class="action-row"
+        *ngFor="let action of actions"
+        [ngClass]="'tone-' + action.tone"
+      >
+        <i class="bi" [ngClass]="action.iconClass"></i>
+        <div>
+          <strong>{{ action.label }}</strong>
+          <small *ngIf="action.sublabel">{{ action.sublabel }}</small>
+        </div>
+      </button>
+
+      <a routerLink="/check-in/queue" class="next-btn"><i class="bi bi-arrow-right"></i> Next Guest in Queue (8 remaining)</a>
+      <a routerLink="/dashboard" class="done-btn">Done - Return to Dashboard</a>
+    </aside>
+  </div>
+</section>

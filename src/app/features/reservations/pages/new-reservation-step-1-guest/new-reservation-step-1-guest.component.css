@@ -1,0 +1,409 @@
+.reservation-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.flow-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.flow-head h2 {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.head-actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ghost-btn,
+.primary-btn,
+.primary-inline,
+.row-cta {
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.ghost-btn,
+.row-cta {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--text-2);
+}
+
+.primary-btn,
+.primary-inline {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  align-items: center;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.step-item.active {
+  color: #1e293b;
+}
+
+.step-item.done {
+  color: #16a34a;
+}
+
+.step-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dbeafe;
+  color: #3b82f6;
+  font-size: 9px;
+}
+
+.step-item.active .step-badge {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.step-item.done .step-badge {
+  background: #16a34a;
+  color: #fff;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 10px;
+}
+
+.panel {
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 14px;
+}
+
+.panel h3,
+.summary-section h4,
+.section-title {
+  margin: 0;
+  color: var(--text-1);
+}
+
+.section-title {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-input {
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  font-size: 11px;
+  color: #94a3b8;
+  background: #fff;
+}
+
+.helper {
+  margin: 6px 0 0;
+  color: var(--text-3);
+  font-size: 9px;
+}
+
+.guest-list {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.guest-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #fff;
+}
+
+.guest-row.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.guest-row.walkin {
+  background: #f8fafc;
+}
+
+.guest-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.avatar.neutral {
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 11px;
+}
+
+.guest-left strong,
+.guest-left p,
+.guest-left small {
+  margin: 0;
+}
+
+.guest-left strong {
+  font-size: 11px;
+  color: var(--text-1);
+}
+
+.guest-left p,
+.guest-left small {
+  font-size: 9px;
+}
+
+.guest-left p {
+  color: var(--text-2);
+}
+
+.guest-left small {
+  color: #ca8a04;
+}
+
+.row-cta.selected {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.grid-5,
+.grid-3 {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.grid-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: 1.1fr 1fr 1fr;
+}
+
+label {
+  display: grid;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--text-2);
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--text-1);
+  background: #fff;
+}
+
+.notes-block {
+  margin-top: 10px;
+}
+
+.panel-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-panel {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.guest-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guest-summary-card strong,
+.guest-summary-card p {
+  margin: 0;
+}
+
+.guest-summary-card p {
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.summary-grid {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+}
+
+.summary-grid span,
+.detail-list span,
+.estimate-list span,
+.stay-row span {
+  color: var(--text-3);
+  font-size: 9px;
+}
+
+.summary-grid strong,
+.detail-list strong,
+.estimate-list strong,
+.stay-row strong {
+  color: var(--text-1);
+  font-size: 10px;
+}
+
+.summary-section {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.detail-list,
+.estimate-list {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.detail-list div,
+.estimate-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.success {
+  color: #16a34a !important;
+}
+
+.total-line {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px solid var(--text-1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-line span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.total-line strong {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.summary-section small {
+  color: var(--text-3);
+  font-size: 9px;
+}
+
+.stay-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+}
+
+.stars {
+  color: #f59e0b !important;
+}
+
+@media (max-width: 1200px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .stepper {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .step-item {
+    width: 100%;
+  }
+}

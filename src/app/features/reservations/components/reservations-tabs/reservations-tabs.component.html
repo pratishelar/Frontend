@@ -1,0 +1,11 @@
+<article class="tabs-card">
+  <button
+    *ngFor="let tab of tabs"
+    type="button"
+    class="tab"
+    [class.active]="tab === activeTab"
+    (click)="tabChange.emit(tab)"
+  >
+    {{ tab }}
+  </button>
+</article>

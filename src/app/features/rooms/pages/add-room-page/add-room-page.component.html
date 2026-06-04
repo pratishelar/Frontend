@@ -1,0 +1,93 @@
+<section class="add-room-page">
+  <div class="top-actions">
+    <a routerLink="/rooms" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Rooms
+    </a>
+    <a routerLink="/rooms/calendar-view" class="ghost-btn">
+      <i class="bi bi-calendar3" aria-hidden="true"></i>
+      Open Calendar
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Create New Room</h3>
+      <small>Set room identity, sell controls, and housekeeping defaults.</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Room Number *</span>
+        <input type="text" placeholder="e.g. 407" />
+      </label>
+
+      <label>
+        <span>Room Type *</span>
+        <select>
+          <option *ngFor="let type of roomTypes">{{ type }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Floor *</span>
+        <select>
+          <option *ngFor="let floor of floors">{{ floor }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Bed Configuration</span>
+        <input type="text" placeholder="1 King / 2 Twin" />
+      </label>
+
+      <label>
+        <span>Max Occupancy</span>
+        <input type="number" value="2" />
+      </label>
+
+      <label>
+        <span>Base Rate ($)</span>
+        <input type="number" value="189" />
+      </label>
+    </div>
+
+    <section class="panel">
+      <h4>Sell Controls</h4>
+      <div class="check-grid">
+        <label><input type="checkbox" checked /> Include in online channels</label>
+        <label><input type="checkbox" checked /> Allow overbooking protection</label>
+        <label><input type="checkbox" /> Mark as connecting room</label>
+        <label><input type="checkbox" /> Requires manager approval for discounts</label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h4>Housekeeping Defaults</h4>
+      <div class="form-grid hk-grid">
+        <label>
+          <span>Default Shift</span>
+          <select>
+            <option *ngFor="let mode of housekeepingModes">{{ mode }}</option>
+          </select>
+        </label>
+        <label>
+          <span>Turnover Target (min)</span>
+          <input type="number" value="40" />
+        </label>
+        <label>
+          <span>Maintenance Notes</span>
+          <input type="text" placeholder="Optional permanent notes" />
+        </label>
+      </div>
+    </section>
+
+    <footer class="footer-actions">
+      <a routerLink="/rooms" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn">
+        <i class="bi bi-check2-circle" aria-hidden="true"></i>
+        Save Room
+      </button>
+    </footer>
+  </article>
+</section>

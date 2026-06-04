@@ -1,0 +1,33 @@
+<article class="panel tasks-panel">
+  <div class="panel-head">
+    <h3>Today's Tasks</h3>
+    <button type="button" class="inline-link">View All</button>
+  </div>
+
+  <div class="task-table-wrap">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Guest</th>
+          <th>Room</th>
+          <th>Type</th>
+          <th>Time</th>
+          <th>Source</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.guest }}</td>
+          <td>{{ task.room }}</td>
+          <td>{{ task.type }}</td>
+          <td>{{ task.time }}</td>
+          <td>{{ task.source }}</td>
+          <td>
+            <span class="task-status" [ngClass]="task.status.toLowerCase().replace(' ', '-')">{{ task.status }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>

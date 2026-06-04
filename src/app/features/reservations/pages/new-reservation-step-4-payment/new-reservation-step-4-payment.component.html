@@ -1,0 +1,101 @@
+<section class="reservation-flow">
+  <div class="stepper">
+    <div *ngFor="let step of steps; let index = index" class="step-item" [class.active]="step.active" [class.done]="step.done">
+      <span class="step-badge">{{ index + 1 }}</span>
+      <span>{{ step.label }}</span>
+      <i class="step-line" *ngIf="index < steps.length - 1"></i>
+    </div>
+  </div>
+
+  <div class="layout-grid">
+    <article class="panel main-panel">
+      <h3>Payment Method</h3>
+
+      <div class="payment-tabs">
+        <button type="button" *ngFor="let method of paymentMethods" [class.active]="method.active">{{ method.label }}</button>
+      </div>
+
+      <div class="card-preview">
+        <div>
+          <small>GRAND HOTEL PMS</small>
+          <strong>•••• •••• •••• 4242</strong>
+          <p>Cardholder John Smith</p>
+        </div>
+        <span>VISA</span>
+      </div>
+
+      <div class="section-title">Card Details</div>
+      <div class="grid-3">
+        <label class="wide"><span>Card Number *</span><input type="text" value="4242 4242 4242 4242" /></label>
+        <label><span>Expiry Date *</span><input type="text" value="09 / 28" /></label>
+        <label><span>CVV *</span><input type="password" value="•••" /></label>
+      </div>
+
+      <div class="section-title">Billing Address</div>
+      <label class="same-as"><input type="checkbox" checked /> Same as guest address on file</label>
+      <label><span>Street Address</span><input type="text" value="123 Main Street, Toronto" /></label>
+      <div class="grid-4">
+        <label><span>City</span><input type="text" value="Toronto" /></label>
+        <label><span>Province</span><input type="text" value="Ontario" /></label>
+        <label><span>Postal Code</span><input type="text" value="M5V 3A1" /></label>
+        <label><span>Country</span><input type="text" value="Canada" /></label>
+      </div>
+
+      <div class="section-title">Payment Plan</div>
+      <div class="plan-grid">
+        <article class="plan-card" *ngFor="let plan of plans" [class.selected]="plan.selected">
+          <label><input type="radio" name="paymentPlan" [checked]="plan.selected" /> {{ plan.title }}</label>
+          <p>{{ plan.note }}</p>
+        </article>
+      </div>
+
+      <div class="security-note">🔒 256-bit SSL encryption · PCI DSS Level 1 Compliant · Your card is never stored</div>
+
+      <footer class="panel-footer">
+        <a routerLink="/reservations/step-3-rates-addons" class="ghost-btn">← Back: Rates & Add-ons</a>
+        <a routerLink="/reservations/step-5-confirmation" class="primary-btn">Review & Confirm →</a>
+      </footer>
+    </article>
+
+    <aside class="panel summary-panel">
+      <h3>Payment Summary</h3>
+      <article class="guest-summary-card">
+        <span class="avatar">JS</span>
+        <div>
+          <strong>John Smith</strong>
+          <p>Gold Member</p>
+        </div>
+      </article>
+      <div class="summary-grid">
+        <div><span>Room</span><strong>201 - Deluxe King</strong></div>
+        <div><span>Check-in</span><strong>Fri, 29 May 2026</strong></div>
+        <div><span>Check-out</span><strong>Tue, 02 Jun 2026</strong></div>
+        <div><span>Duration</span><strong>4 nights</strong></div>
+        <div><span>Guests</span><strong>2 Adults</strong></div>
+        <div><span>Source</span><strong>Direct / Front Desk</strong></div>
+      </div>
+      <div class="breakdown-list">
+        <div><span>Fri 29 May (Weekend)</span><strong>$220</strong></div>
+        <div><span>Sat 30 May (Weekend)</span><strong>$220</strong></div>
+        <div><span>Sun 31 May (Weekend)</span><strong>$170</strong></div>
+        <div><span>Mon 01 Jun (Weekend)</span><strong>$170</strong></div>
+        <div><span>Add-ons (Valet + Amenity)</span><strong>+$165</strong></div>
+        <div><span>Subtotal</span><strong>$945.00</strong></div>
+        <div><span>Gold Member (5% off)</span><strong class="success">-$47.25</strong></div>
+        <div><span>Tax 13% HST</span><strong>$114.98</strong></div>
+      </div>
+      <div class="total-line"><span>Total</span><strong>$1,012.73</strong></div>
+      <div class="payment-banner">✓ Room 201 available · No conflicts</div>
+      <div class="policy-card warning">
+        <strong>Cancellation Policy</strong>
+        <p>Free cancellation until 29 May 2026 at 3:00 PM.</p>
+        <p>After that: 1 night charge applies.</p>
+        <p>No-show: full stay charged.</p>
+      </div>
+      <div class="policy-card gold">
+        <strong>This booking earns John 1,013 Gold Points</strong>
+        <p>1 point per $1 spent · New balance: 2,213 pts</p>
+      </div>
+    </aside>
+  </div>
+</section>

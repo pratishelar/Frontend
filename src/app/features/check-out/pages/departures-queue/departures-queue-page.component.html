@@ -1,0 +1,97 @@
+<section class="checkout-page">
+  <header class="head-row">
+    <div>
+      <h2>Check-out</h2>
+      <p>Friday, 29 May 2026 • Today's Departures</p>
+    </div>
+    <div class="head-actions">
+      <button type="button" class="ghost-btn">Extension</button>
+      <a routerLink="/check-out/folio-review" class="primary-btn">Express CO</a>
+    </div>
+  </header>
+
+  <div class="stats-grid">
+    <article class="stat-card" *ngFor="let stat of stats" [ngClass]="'tone-' + stat.tone">
+      <div>
+        <p>{{ stat.title }}</p>
+        <strong>{{ stat.value }}</strong>
+        <small>{{ stat.subtitle }}</small>
+      </div>
+      <span class="stat-icon"><i class="bi" [ngClass]="stat.iconClass"></i></span>
+    </article>
+  </div>
+
+  <article class="toolbar-card">
+    <div class="toolbar-row">
+      <div class="field wide"><i class="bi bi-search"></i> Search guest, room, conf#...</div>
+      <div class="field">Due by <i class="bi bi-chevron-down"></i></div>
+      <div class="field">Room <i class="bi bi-chevron-down"></i></div>
+      <div class="field">Status <i class="bi bi-chevron-down"></i></div>
+      <button type="button" class="outline-btn">Late CO Request</button>
+      <button type="button" class="outline-btn muted">Print All Folios</button>
+    </div>
+  </article>
+
+  <article class="tabs-card">
+    <button
+      type="button"
+      class="tab"
+      *ngFor="let tab of tabs"
+      [class.active]="tab === activeTab"
+    >
+      {{ tab }}
+    </button>
+  </article>
+
+  <article class="table-card">
+    <div class="table-wrap">
+      <table class="departures-table">
+        <thead>
+          <tr>
+            <th>Conf #</th>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>Due By</th>
+            <th>Nights</th>
+            <th>Balance Due</th>
+            <th>Folio</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows">
+            <td><a routerLink="/check-out/folio-review" class="conf-link">{{ row.confNo }}</a></td>
+            <td>
+              <div class="guest-cell">
+                <span class="avatar">{{ row.initials }}</span>
+                <div>
+                  <p>{{ row.guest }}</p>
+                  <small>{{ row.tier }}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="room-main">{{ row.room }}</p>
+              <small>{{ row.roomType }}</small>
+            </td>
+            <td class="due-by">{{ row.dueBy }}</td>
+            <td>{{ row.nights }}</td>
+            <td class="balance">{{ row.balanceDue }}</td>
+            <td><span class="folio-chip" [ngClass]="row.folio.toLowerCase().replace(' ', '-')">{{ row.folio }}</span></td>
+            <td class="note">{{ row.notes }}</td>
+            <td><span class="status-chip" [ngClass]="statusClass(row.status)">{{ row.status }}</span></td>
+            <td>
+              <a routerLink="/check-out/folio-review" class="checkout-btn"><i class="bi bi-cash-coin"></i> Check Out</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <p>6 pending departures · 2 already completed · Revenue collected today: $1,137</p>
+    </footer>
+  </article>
+</section>
