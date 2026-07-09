@@ -1,0 +1,62 @@
+<section class="edit-page" *ngIf="room; else notFound">
+  <div class="top-actions">
+    <a [routerLink]="['/rooms/view-room', room.roomNo]" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Details
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Edit Room {{ room.roomNo }}</h3>
+      <small>Update room setup and operating status.</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Type</span>
+        <input type="text" [(ngModel)]="type" />
+      </label>
+      <label>
+        <span>Floor</span>
+        <input type="text" [(ngModel)]="floor" />
+      </label>
+      <label>
+        <span>Beds</span>
+        <input type="text" [(ngModel)]="beds" />
+      </label>
+      <label>
+        <span>Rate/Night ($)</span>
+        <input type="number" min="0" [(ngModel)]="rateNight" />
+      </label>
+      <label>
+        <span>Status</span>
+        <select [(ngModel)]="status">
+          <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+      <label>
+        <span>Housekeeping</span>
+        <select [(ngModel)]="housekeeping">
+          <option *ngFor="let option of housekeepingOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+      <label>
+        <span>Current Guest</span>
+        <input type="text" [(ngModel)]="currentGuest" />
+      </label>
+    </div>
+
+    <footer class="footer-actions">
+      <a [routerLink]="['/rooms/view-room', room.roomNo]" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn" (click)="save()">Save Changes</button>
+    </footer>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="form-card not-found">
+    <h3>Room not found</h3>
+    <a routerLink="/rooms" class="ghost-btn">Back to Rooms</a>
+  </article>
+</ng-template>

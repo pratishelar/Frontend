@@ -1,0 +1,100 @@
+<section class="guests-page">
+  <div class="metrics-grid">
+    <article class="metric-card" *ngFor="let metric of metrics">
+      <p>{{ metric.label }}</p>
+      <h3>{{ metric.value }}</h3>
+      <small>{{ metric.helper }}</small>
+      <span class="metric-icon" [ngClass]="'tone-' + metric.tone">
+        <i class="bi" [ngClass]="metric.icon" aria-hidden="true"></i>
+      </span>
+    </article>
+  </div>
+
+  <section class="filter-bar">
+    <label class="field search-field">
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+        placeholder="Search guest id, name, or email..."
+        aria-label="Search guests"
+      />
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedTier" (change)="applyFilters()" aria-label="Filter by tier">
+        <option *ngFor="let tier of tierOptions" [value]="tier">Tier: {{ tier }}</option>
+      </select>
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedStatus" (change)="applyFilters()" aria-label="Filter by status">
+        <option *ngFor="let status of statusOptions" [value]="status">Status: {{ status }}</option>
+      </select>
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedSort" (change)="applyFilters()" aria-label="Sort guests">
+        <option *ngFor="let sort of sortOptions" [value]="sort">Sort: {{ sort }}</option>
+      </select>
+    </label>
+    <a routerLink="/guests/add-guest" class="primary-btn">
+      <i class="bi bi-plus-circle" aria-hidden="true"></i>
+      Add Guest
+    </a>
+    <div class="tier-strip" aria-label="Tier quick filters">
+      <span class="tier-chip" [ngClass]="chip.tone" *ngFor="let chip of quickTierChips">{{ chip.label }}</span>
+    </div>
+  </section>
+
+  <article class="table-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>GUEST</th>
+            <th>EMAIL</th>
+            <th>LOYALTY</th>
+            <th>STAYS</th>
+            <th>TOTAL SPENT</th>
+            <th>LAST STAY</th>
+            <th>NATIONALITY</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let guest of pagedGuests">
+            <td>
+              <div class="guest-cell">
+                <span class="avatar">{{ initials(guest.fullName) }}</span>
+                <div>
+                  <p>{{ guest.fullName }}</p>
+                  <small>{{ guest.phone }}</small>
+                </div>
+              </div>
+            </td>
+            <td>{{ guest.email }}</td>
+            <td><span class="chip tier" [ngClass]="tierClass(guest.tier)">{{ guest.tier }}</span></td>
+            <td><strong>{{ guest.totalStays }}</strong></td>
+            <td><strong>{{ guest.lifetimeValue | currency: 'USD' : 'symbol' : '1.0-0' }}</strong></td>
+            <td>{{ guest.lastStay }}</td>
+            <td>{{ countryLabel(guest.country) }}</td>
+            <td class="actions-col">
+              <a [routerLink]="['/guests/view-guest', guest.id]" class="mini-btn view">View</a>
+              <a [routerLink]="['/guests/edit-guest', guest.id]" class="mini-btn history">History</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <app-table-pagination
+      [summary]="summary"
+      [pageSizes]="pageSizes"
+      [selectedPageSize]="selectedPageSize"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageSizeChange)="onPageSizeChange($event)"
+      (previousPage)="onPreviousPage()"
+      (nextPage)="onNextPage()"
+    />
+  </article>
+</section>

@@ -1,0 +1,54 @@
+<section class="edit-page" *ngIf="promo; else notFound">
+  <div class="top-actions">
+    <a [routerLink]="['/rates/view-promo-code', promo.code]" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Details
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Edit Promo Code</h3>
+      <small>{{ promo.code }}</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Discount</span>
+        <input type="text" [value]="promo.discount" />
+      </label>
+      <label>
+        <span>Valid From</span>
+        <input type="date" [value]="promo.validFrom" />
+      </label>
+      <label>
+        <span>Valid To</span>
+        <input type="date" [value]="promo.validTo" />
+      </label>
+      <label>
+        <span>Minimum Nights</span>
+        <input type="number" [value]="promo.minNights" />
+      </label>
+      <label>
+        <span>Maximum Uses</span>
+        <input type="number" [value]="promo.maxUses" />
+      </label>
+      <label>
+        <span>Applicable Rate Plan</span>
+        <input type="text" [value]="promo.applicableRatePlan" />
+      </label>
+    </div>
+
+    <footer class="footer-actions">
+      <a routerLink="/rates/promo-codes" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn">Save Changes</button>
+    </footer>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="form-card not-found">
+    <h3>Promo code not found</h3>
+    <a routerLink="/rates/promo-codes" class="ghost-btn">Back to Promo Codes</a>
+  </article>
+</ng-template>

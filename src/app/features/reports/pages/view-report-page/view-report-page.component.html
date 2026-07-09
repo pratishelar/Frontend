@@ -1,0 +1,32 @@
+<section class="details-page" *ngIf="report; else notFound">
+  <div class="top-actions">
+    <a routerLink="/reports" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Reports
+    </a>
+  </div>
+
+  <article class="details-card">
+    <header>
+      <h3>{{ report.name }}</h3>
+      <small>{{ report.id }}</small>
+    </header>
+
+    <div class="grid">
+      <p><span>Category</span>{{ report.category }}</p>
+      <p><span>Status</span>{{ report.status }}</p>
+      <p><span>Period</span>{{ report.period }}</p>
+      <p><span>Generated On</span>{{ report.generatedOn }}</p>
+      <p><span>Owner</span>{{ report.owner }}</p>
+      <p><span>Format</span>{{ report.format }}</p>
+      <p class="full-width"><span>Summary</span>{{ report.summary }}</p>
+    </div>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="details-card not-found">
+    <h3>Report not found</h3>
+    <a routerLink="/reports" class="ghost-btn">Back to Reports</a>
+  </article>
+</ng-template>

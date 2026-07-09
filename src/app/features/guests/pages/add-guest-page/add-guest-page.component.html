@@ -1,0 +1,303 @@
+<section class="add-guest">
+  <header class="page-header">
+    <h2>Add New Guest</h2>
+    <div class="header-actions">
+      <a routerLink="/guests" class="btn ghost">Cancel</a>
+      <button type="button" class="btn primary" (click)="saveGuest()">Save Guest</button>
+    </div>
+  </header>
+
+  <small *ngIf="errorMessage" class="error-text">{{ errorMessage }}</small>
+
+  <section class="content-grid">
+    <article class="card card-main">
+      <header class="section-head">
+        <h3>Personal Information</h3>
+      </header>
+
+      <div class="form-grid three-col">
+        <label>
+          <span>Salutation</span>
+          <select [(ngModel)]="salutation">
+            <option *ngFor="let option of salutationOptions" [value]="option">{{ option }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span>First Name *</span>
+          <input type="text" [(ngModel)]="firstName" placeholder="First name" />
+        </label>
+
+        <label>
+          <span>Last Name *</span>
+          <input type="text" [(ngModel)]="lastName" placeholder="Last name" />
+        </label>
+
+        <label>
+          <span>Date of Birth</span>
+          <input type="text" [(ngModel)]="dateOfBirth" placeholder="DD / MM / YYYY" />
+        </label>
+
+        <label>
+          <span>Gender</span>
+          <select [(ngModel)]="gender">
+            <option *ngFor="let option of genderOptions" [value]="option">{{ option }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Nationality</span>
+          <input type="text" [(ngModel)]="nationality" placeholder="Canada" />
+        </label>
+
+        <label class="wide-2">
+          <span>Email Address *</span>
+          <input type="email" [(ngModel)]="email" placeholder="guest@email.com" />
+        </label>
+
+        <label>
+          <span>Email Opt-in</span>
+          <button type="button" class="pill-button" [class.on]="emailOptIn" (click)="emailOptIn = !emailOptIn">
+            {{ emailOptIn ? '✓ Opted In' : 'Not Opted In' }}
+          </button>
+        </label>
+
+        <label>
+          <span>Phone *</span>
+          <div class="input-row">
+            <select class="mini" [(ngModel)]="phoneCountryCode">
+              <option *ngFor="let option of countryCodeOptions" [value]="option">{{ option }}</option>
+            </select>
+            <input type="text" [(ngModel)]="phoneNumber" placeholder="Phone number" />
+          </div>
+        </label>
+
+        <label>
+          <span>Phone Type</span>
+          <select [(ngModel)]="phoneType">
+            <option *ngFor="let option of phoneTypeOptions" [value]="option">{{ option }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Passport / ID Number</span>
+          <input type="text" [(ngModel)]="passportNumber" placeholder="Passport or ID number" />
+        </label>
+
+        <label>
+          <span>Expiry Date</span>
+          <input type="text" [(ngModel)]="passportExpiry" placeholder="DD / MM / YYYY" />
+        </label>
+      </div>
+
+      <section class="subsection">
+        <h4>Address</h4>
+        <div class="form-grid four-col">
+          <label class="full-width">
+            <span>Street Address</span>
+            <input type="text" [(ngModel)]="streetAddress" placeholder="Street address" />
+          </label>
+
+          <label>
+            <span>City</span>
+            <input type="text" [(ngModel)]="city" placeholder="City" />
+          </label>
+
+          <label>
+            <span>State / Province</span>
+            <input type="text" [(ngModel)]="state" placeholder="State" />
+          </label>
+
+          <label>
+            <span>Postal Code</span>
+            <input type="text" [(ngModel)]="postalCode" placeholder="Postal code" />
+          </label>
+
+          <label>
+            <span>Country</span>
+            <select [(ngModel)]="countryCode">
+              <option *ngFor="let option of countryShortOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="subsection">
+        <h4>Vehicle & Emergency Contact</h4>
+        <div class="form-grid three-col">
+          <label>
+            <span>Vehicle Plate (Parking)</span>
+            <input type="text" [(ngModel)]="vehiclePlate" placeholder="Optional" />
+          </label>
+
+          <label>
+            <span>Emergency Contact Name</span>
+            <input type="text" [(ngModel)]="emergencyContactName" placeholder="Name" />
+          </label>
+
+          <label>
+            <span>Emergency Phone</span>
+            <input type="text" [(ngModel)]="emergencyPhone" placeholder="Phone" />
+          </label>
+
+          <label class="full-width">
+            <span>Special Needs / Accessibility</span>
+            <textarea [(ngModel)]="specialNeeds" rows="2" placeholder="Wheelchair, hearing impaired, dietary restrictions, allergies..."></textarea>
+          </label>
+        </div>
+      </section>
+    </article>
+
+    <article class="card card-side">
+      <header class="section-head">
+        <h3>Loyalty & Preferences</h3>
+      </header>
+
+      <div class="form-grid two-col compact">
+        <label class="full-width">
+          <span>Loyalty Tier</span>
+          <select [(ngModel)]="loyaltyTier">
+            <option *ngFor="let option of loyaltyTierOptions" [value]="option">{{ option }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Loyalty Points</span>
+          <input type="text" [(ngModel)]="loyaltyPoints" />
+        </label>
+
+        <label>
+          <span>Member Since</span>
+          <input type="text" [(ngModel)]="memberSince" />
+        </label>
+      </div>
+
+      <section class="subsection">
+        <h4>Room Preferences</h4>
+        <div class="form-grid two-col compact">
+          <label class="full-width">
+            <span>Preferred Room Type</span>
+            <select [(ngModel)]="preferredRoomType">
+              <option *ngFor="let option of noPreferenceOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Preferred Floor</span>
+            <select [(ngModel)]="preferredFloor">
+              <option *ngFor="let option of noPreferenceOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Bed Type</span>
+            <select [(ngModel)]="bedType">
+              <option *ngFor="let option of bedTypeOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Room Location</span>
+            <select [(ngModel)]="roomLocation">
+              <option *ngFor="let option of noPreferenceOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>View Preference</span>
+            <select [(ngModel)]="viewPreference">
+              <option *ngFor="let option of viewOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="subsection">
+        <h4>Dining & Lifestyle</h4>
+        <div class="form-grid two-col compact">
+          <label class="full-width">
+            <span>Dietary Requirements</span>
+            <select [(ngModel)]="dietaryRequirement">
+              <option *ngFor="let option of dietaryOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="checks two-col">
+          <label><input type="checkbox" [(ngModel)]="vegetarian" /> Vegetarian</label>
+          <label><input type="checkbox" [(ngModel)]="vegan" /> Vegan</label>
+          <label><input type="checkbox" [(ngModel)]="halal" /> Halal</label>
+          <label><input type="checkbox" [(ngModel)]="kosher" /> Kosher</label>
+          <label><input type="checkbox" [(ngModel)]="glutenFree" /> Gluten-Free</label>
+          <label><input type="checkbox" [(ngModel)]="nutAllergy" /> Nut Allergy</label>
+        </div>
+
+        <div class="form-grid two-col compact">
+          <label>
+            <span>Pillow Preference</span>
+            <select [(ngModel)]="pillowPreference">
+              <option *ngFor="let option of noPreferenceOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Newspaper</span>
+            <select [(ngModel)]="newspaper">
+              <option *ngFor="let option of noPreferenceOptions" [value]="option">{{ option }}</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="subsection">
+        <h4>Marketing</h4>
+        <label class="toggle-line">
+          <span class="toggle" [class.on]="smsNotifications" (click)="smsNotifications = !smsNotifications">
+            <i></i>
+          </span>
+          SMS / Text notifications
+        </label>
+      </section>
+    </article>
+
+    <article class="card card-profile">
+      <header class="section-head">
+        <h3>Guest Profile Card</h3>
+      </header>
+
+      <div class="avatar">?</div>
+      <p class="profile-name">{{ previewName }}</p>
+      <p class="muted">No previous stays</p>
+
+      <section class="stats">
+        <h4>Guest Statistics</h4>
+        <div><span>Total Stays</span><strong>0</strong></div>
+        <div><span>Total Spent</span><strong>$0</strong></div>
+        <div><span>Loyalty Points</span><strong>{{ loyaltyPoints }} pts</strong></div>
+        <div><span>Member Since</span><strong>{{ memberSince | date: 'MMM y' }}</strong></div>
+      </section>
+
+      <section class="consent">
+        <h4>GDPR & Data Consent</h4>
+        <label class="toggle-line">
+          <span class="toggle" [class.on]="marketingEmails" (click)="marketingEmails = !marketingEmails"><i></i></span>
+          Marketing emails
+        </label>
+        <label class="toggle-line">
+          <span class="toggle" [class.on]="stayAnalytics" (click)="stayAnalytics = !stayAnalytics"><i></i></span>
+          Stay history analytics
+        </label>
+        <label class="toggle-line">
+          <span class="toggle" [class.on]="shareWithPartners" (click)="shareWithPartners = !shareWithPartners"><i></i></span>
+          Share with partners
+        </label>
+      </section>
+
+      <section class="staff-notes">
+        <h4>Internal Staff Notes</h4>
+        <textarea [(ngModel)]="internalNotes" rows="4" placeholder="VIP notes, recurring preferences, flags for staff..."></textarea>
+        <small>⚠ This note is visible to front desk staff only.</small>
+      </section>
+    </article>
+  </section>
+</section>

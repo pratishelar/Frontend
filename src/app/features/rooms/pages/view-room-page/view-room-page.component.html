@@ -1,0 +1,35 @@
+<section class="details-page" *ngIf="room; else notFound">
+  <div class="top-actions">
+    <a routerLink="/rooms" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Rooms
+    </a>
+    <a [routerLink]="['/rooms/edit-room', room.roomNo]" class="primary-btn">
+      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+      Edit Room
+    </a>
+  </div>
+
+  <article class="details-card">
+    <header>
+      <h3>Room {{ room.roomNo }}</h3>
+      <small>{{ room.status }}</small>
+    </header>
+
+    <div class="grid">
+      <p><span>Type</span>{{ room.type }}</p>
+      <p><span>Floor</span>{{ room.floor }}</p>
+      <p><span>Beds</span>{{ room.beds }}</p>
+      <p><span>Rate/Night</span>{{ room.rateNight | currency: 'USD' : 'symbol' : '1.0-0' }}</p>
+      <p><span>Housekeeping</span>{{ room.housekeeping }}</p>
+      <p><span>Current Guest</span>{{ room.currentGuest }}</p>
+    </div>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="details-card not-found">
+    <h3>Room not found</h3>
+    <a routerLink="/rooms" class="ghost-btn">Back to Rooms</a>
+  </article>
+</ng-template>

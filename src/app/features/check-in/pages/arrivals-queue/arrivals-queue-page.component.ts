@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TablePaginationComponent } from '../../../../shared/ui/table-pagination/table-pagination.component';
 import { CheckInQueueRow, CheckInQueueStats } from '../../models/check-in.model';
 
 @Component({
   selector: 'app-arrivals-queue-page',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TablePaginationComponent],
   templateUrl: './arrivals-queue-page.component.html',
   styleUrl: './arrivals-queue-page.component.css',
 })
@@ -139,7 +140,51 @@ export class ArrivalsQueuePageComponent {
     },
   ];
 
+  readonly pageSizes = ['10', '25', '50'];
+  selectedPageSize = '10';
+  currentPage = 1;
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.rows.length / this.pageSize));
+  }
+
+  get pagedRows(): CheckInQueueRow[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.rows.slice(start, start + this.pageSize);
+  }
+
+  get summary(): string {
+    if (this.rows.length === 0) {
+      return 'Showing 0 arrivals';
+    }
+
+    const start = (this.currentPage - 1) * this.pageSize + 1;
+    const end = Math.min(start + this.pageSize - 1, this.rows.length);
+    return `Showing ${start}-${end} of ${this.rows.length} arrivals`;
+  }
+
+  onPageSizeChange(size: string): void {
+    this.selectedPageSize = size;
+    this.currentPage = 1;
+  }
+
+  onPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage -= 1;
+    }
+  }
+
+  onNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage += 1;
+    }
+  }
+
   statusClass(status: CheckInQueueRow['status']): string {
     return status.toLowerCase().replace(' ', '-');
+  }
+
+  private get pageSize(): number {
+    return Number(this.selectedPageSize);
   }
 }

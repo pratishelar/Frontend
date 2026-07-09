@@ -51,7 +51,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of rows">
+          <tr *ngFor="let row of pagedRows">
             <td><a routerLink="/check-in/verify-assign" class="conf-link">{{ row.confNo }}</a></td>
             <td>
               <div class="guest-cell">
@@ -82,9 +82,15 @@
       </table>
     </div>
 
-    <footer class="table-footer">
-      <p>Showing 9 pending of 12 total arrivals today</p>
-      <p class="ok">3 already checked in</p>
-    </footer>
+    <app-table-pagination
+      [summary]="summary"
+      [pageSizes]="pageSizes"
+      [selectedPageSize]="selectedPageSize"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageSizeChange)="onPageSizeChange($event)"
+      (previousPage)="onPreviousPage()"
+      (nextPage)="onNextPage()"
+    />
   </article>
 </section>

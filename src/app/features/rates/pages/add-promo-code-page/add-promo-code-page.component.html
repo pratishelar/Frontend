@@ -1,0 +1,86 @@
+<section class="add-promo-page">
+  <div class="top-actions">
+    <a routerLink="/rates/promo-codes" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Promo Codes
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Create Promo Code</h3>
+      <small>Set discount logic, validity window, and booking restrictions.</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Promo Code *</span>
+        <input type="text" placeholder="e.g. SUMMER20" />
+      </label>
+
+      <label>
+        <span>Discount Type *</span>
+        <select>
+          <option *ngFor="let type of discountTypes">{{ type }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Discount Value *</span>
+        <input type="number" value="20" />
+      </label>
+
+      <label>
+        <span>Valid From *</span>
+        <input type="date" />
+      </label>
+
+      <label>
+        <span>Valid To *</span>
+        <input type="date" />
+      </label>
+
+      <label>
+        <span>Max Redemptions</span>
+        <input type="number" value="200" />
+      </label>
+    </div>
+
+    <section class="panel">
+      <h4>Applicability</h4>
+      <div class="form-grid applicability-grid">
+        <label>
+          <span>Applicable Rate Plan</span>
+          <select>
+            <option *ngFor="let plan of applicableRatePlans">{{ plan }}</option>
+          </select>
+        </label>
+        <label>
+          <span>Minimum Stay (nights)</span>
+          <input type="number" value="1" />
+        </label>
+        <label>
+          <span>Blackout Dates</span>
+          <input type="text" placeholder="e.g. 24 Dec - 01 Jan" />
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h4>Booking Conditions</h4>
+      <div class="check-grid">
+        <label><input type="checkbox" checked /> Stack with member discounts</label>
+        <label><input type="checkbox" /> Apply only to direct bookings</label>
+        <label><input type="checkbox" checked /> Enforce one use per guest</label>
+      </div>
+    </section>
+
+    <footer class="footer-actions">
+      <a routerLink="/rates/promo-codes" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn">
+        <i class="bi bi-check2-circle" aria-hidden="true"></i>
+        Save Promo Code
+      </button>
+    </footer>
+  </article>
+</section>

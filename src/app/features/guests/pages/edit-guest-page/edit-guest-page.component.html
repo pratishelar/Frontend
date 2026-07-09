@@ -1,0 +1,62 @@
+<section class="edit-page" *ngIf="guest; else notFound">
+  <div class="top-actions">
+    <a [routerLink]="['/guests/view-guest', guest.id]" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Details
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Edit Guest {{ guest.id }}</h3>
+      <small>Update profile details, tier and status.</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Full Name</span>
+        <input type="text" [(ngModel)]="fullName" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" [(ngModel)]="email" />
+      </label>
+      <label>
+        <span>Phone</span>
+        <input type="text" [(ngModel)]="phone" />
+      </label>
+      <label>
+        <span>Country</span>
+        <input type="text" [(ngModel)]="country" />
+      </label>
+      <label>
+        <span>Loyalty Tier</span>
+        <select [(ngModel)]="tier">
+          <option *ngFor="let option of tierOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+      <label>
+        <span>Status</span>
+        <select [(ngModel)]="status">
+          <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+      <label class="full-width">
+        <span>Preferences</span>
+        <input type="text" [(ngModel)]="preferences" />
+      </label>
+    </div>
+
+    <footer class="footer-actions">
+      <a [routerLink]="['/guests/view-guest', guest.id]" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn" (click)="saveGuest()">Save Changes</button>
+    </footer>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="form-card not-found">
+    <h3>Guest not found</h3>
+    <a routerLink="/guests" class="ghost-btn">Back to Guests</a>
+  </article>
+</ng-template>

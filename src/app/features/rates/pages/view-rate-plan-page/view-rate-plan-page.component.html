@@ -1,0 +1,37 @@
+<section class="details-page" *ngIf="plan; else notFound">
+  <div class="top-actions">
+    <a routerLink="/rates" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Rates
+    </a>
+    <a [routerLink]="['/rates/edit-rate-plan', plan.code]" class="primary-btn">
+      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+      Edit Rate Plan
+    </a>
+  </div>
+
+  <article class="details-card">
+    <header>
+      <h3>{{ plan.name }}</h3>
+      <small>{{ plan.code }} · {{ plan.status }}</small>
+    </header>
+
+    <div class="grid">
+      <p><span>Room Type</span>{{ plan.roomType }}</p>
+      <p><span>Board Type</span>{{ plan.boardType }}</p>
+      <p><span>Pricing Model</span>{{ plan.pricingModel }}</p>
+      <p><span>Base Amount</span>{{ plan.amount }}</p>
+      <p><span>Booking Window</span>{{ plan.bookingWindow }}</p>
+      <p><span>Stay Window</span>{{ plan.stayWindow }}</p>
+      <p><span>Channels</span>{{ plan.channels }}</p>
+      <p><span>Status</span>{{ plan.status }}</p>
+    </div>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="details-card not-found">
+    <h3>Rate plan not found</h3>
+    <a routerLink="/rates" class="ghost-btn">Back to Rates</a>
+  </article>
+</ng-template>

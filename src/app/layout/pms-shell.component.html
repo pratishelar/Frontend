@@ -7,8 +7,8 @@
       <a
         *ngFor="let item of navItems"
         [routerLink]="item.path"
-        routerLinkActive="active"
         class="nav-item"
+        [class.active]="isNavItemActive(item)"
       >
         <i class="nav-icon bi" [ngClass]="item.iconClass" aria-hidden="true"></i>
         <span>{{ item.label }}</span>

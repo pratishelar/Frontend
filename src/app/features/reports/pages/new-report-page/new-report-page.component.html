@@ -1,0 +1,58 @@
+<section class="new-report-page">
+  <div class="top-actions">
+    <a routerLink="/reports" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Reports
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Create New Report</h3>
+      <small>Set report details, owner and export format.</small>
+    </header>
+
+    <small *ngIf="errorMessage" class="error-text">{{ errorMessage }}</small>
+
+    <div class="form-grid">
+      <label>
+        <span>Report Name *</span>
+        <input type="text" [(ngModel)]="name" placeholder="e.g. Weekly Revenue Pulse" />
+      </label>
+
+      <label>
+        <span>Category</span>
+        <select [(ngModel)]="category">
+          <option *ngFor="let option of categoryOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Period</span>
+        <input type="text" [(ngModel)]="period" placeholder="This Week" />
+      </label>
+
+      <label>
+        <span>Owner</span>
+        <input type="text" [(ngModel)]="owner" placeholder="Revenue Team" />
+      </label>
+
+      <label>
+        <span>Format</span>
+        <select [(ngModel)]="format">
+          <option *ngFor="let option of formatOptions" [value]="option">{{ option }}</option>
+        </select>
+      </label>
+
+      <label class="full-width">
+        <span>Summary</span>
+        <input type="text" [(ngModel)]="summary" placeholder="Brief description of report output" />
+      </label>
+    </div>
+
+    <footer class="footer-actions">
+      <a routerLink="/reports" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn" (click)="saveReport()">Save Report</button>
+    </footer>
+  </article>
+</section>

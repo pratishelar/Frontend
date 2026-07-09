@@ -1,0 +1,89 @@
+.details-page {
+  display: grid;
+  gap: 12px;
+}
+
+.top-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ghost-btn,
+.primary-btn {
+  text-decoration: none;
+  height: 34px;
+  border-radius: 8px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ghost-btn {
+  border: 1px solid var(--line);
+  color: var(--text-2);
+  background: var(--surface-1);
+}
+
+.primary-btn {
+  border: 1px solid transparent;
+  color: #fff;
+  background: var(--primary-strong);
+}
+
+.details-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.details-card h3,
+.details-card small {
+  margin: 0;
+}
+
+.details-card small {
+  color: var(--text-3);
+  font-size: 11px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.grid p {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-1);
+}
+
+.grid p span {
+  color: var(--text-3);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.not-found {
+  text-align: center;
+  justify-items: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,38 @@
+<section class="details-page" *ngIf="guest; else notFound">
+  <div class="top-actions">
+    <a routerLink="/guests" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Guests
+    </a>
+    <a [routerLink]="['/guests/edit-guest', guest.id]" class="primary-btn">
+      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+      Edit Guest
+    </a>
+  </div>
+
+  <article class="details-card">
+    <header>
+      <h3>{{ guest.fullName }}</h3>
+      <small>{{ guest.id }}</small>
+    </header>
+
+    <div class="grid">
+      <p><span>Email</span>{{ guest.email }}</p>
+      <p><span>Phone</span>{{ guest.phone }}</p>
+      <p><span>Country</span>{{ guest.country }}</p>
+      <p><span>Tier</span>{{ guest.tier }}</p>
+      <p><span>Status</span>{{ guest.status }}</p>
+      <p><span>Last Stay</span>{{ guest.lastStay }}</p>
+      <p><span>Total Stays</span>{{ guest.totalStays }}</p>
+      <p><span>Lifetime Value</span>{{ guest.lifetimeValue | currency: 'USD' : 'symbol' : '1.0-0' }}</p>
+      <p class="full-width"><span>Preferences</span>{{ guest.preferences }}</p>
+    </div>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="details-card not-found">
+    <h3>Guest not found</h3>
+    <a routerLink="/guests" class="ghost-btn">Back to Guests</a>
+  </article>
+</ng-template>

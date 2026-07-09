@@ -46,73 +46,18 @@ export const routes: Routes = [
 			},
 			{
 				path: 'rates',
-				children: [
-					{
-						path: '',
-						loadComponent: () =>
-							import('./shared/section-stub/section-stub.component').then(
-								(m) => m.SectionStubComponent
-							),
-						data: {
-							title: 'Rate Management',
-						},
-					},
-					{
-						path: 'new-rate-plan',
-						loadComponent: () =>
-							import('./shared/section-stub/section-stub.component').then(
-								(m) => m.SectionStubComponent
-							),
-						data: {
-							title: 'New Rate Plan',
-						},
-					},
-					{
-						path: 'add-promo-code',
-						loadComponent: () =>
-							import('./shared/section-stub/section-stub.component').then(
-								(m) => m.SectionStubComponent
-							),
-						data: {
-							title: 'Add Promo Code',
-						},
-					},
-				],
+				loadChildren: () =>
+					import('./features/rates/rates.routes').then((m) => m.ratesRoutes),
 			},
 			{
 				path: 'guests',
-				children: [
-					{
-						path: '',
-						loadComponent: () =>
-							import('./shared/section-stub/section-stub.component').then(
-								(m) => m.SectionStubComponent
-							),
-						data: {
-							title: 'Guest Profiles',
-						},
-					},
-					{
-						path: 'add-guest',
-						loadComponent: () =>
-							import('./shared/section-stub/section-stub.component').then(
-								(m) => m.SectionStubComponent
-							),
-						data: {
-							title: 'Add Guest',
-						},
-					},
-				],
+				loadChildren: () =>
+					import('./features/guests/guests.routes').then((m) => m.guestsRoutes),
 			},
 			{
 				path: 'reports',
-				loadComponent: () =>
-					import('./shared/section-stub/section-stub.component').then(
-						(m) => m.SectionStubComponent
-					),
-				data: {
-					title: 'Reports',
-				},
+				loadChildren: () =>
+					import('./features/reports/reports.routes').then((m) => m.reportsRoutes),
 			},
 			{
 				path: 'housekeeping',

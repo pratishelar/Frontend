@@ -222,6 +222,19 @@ th {
   background: #f8fafc;
 }
 
+.sort-btn {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
 td {
   color: #334155;
 }
@@ -298,6 +311,9 @@ td.rate {
   padding: 0 12px;
   font-size: 10px;
   font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .mini-btn.edit {
@@ -323,27 +339,6 @@ td.rate {
 .table-footer small {
   color: #64748b;
   font-size: 10px;
-}
-
-.pager {
-  display: flex;
-  gap: 6px;
-}
-
-.page-btn {
-  width: 24px;
-  height: 18px;
-  border-radius: 4px;
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
-  color: #64748b;
-  font-size: 10px;
-}
-
- .page-btn.active {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: #fff;
 }
 
 @media (max-width: 1180px) {

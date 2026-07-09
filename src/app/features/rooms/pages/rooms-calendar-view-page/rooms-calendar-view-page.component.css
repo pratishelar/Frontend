@@ -56,6 +56,16 @@
   padding: 0 10px;
 }
 
+.toolbar-row select {
+  height: 23px;
+  border: 1px solid #d5dce6;
+  border-radius: 4px;
+  background: #f3f6fa;
+  color: #4b5563;
+  font-size: 10px;
+  padding: 0 8px;
+}
+
 .date-range .nav-btn {
   width: 20px;
   padding: 0;
@@ -219,6 +229,10 @@
   background: #eef2f7;
 }
 
+.row-grid.drop-target {
+  box-shadow: inset 0 0 0 2px #60a5fa;
+}
+
 .day-cell {
   border-right: 1px solid #d5dde9;
 }
@@ -241,6 +255,31 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  cursor: grab;
+}
+
+.stay-bar.dragging {
+  opacity: 0.85;
+  cursor: grabbing;
+}
+
+.stay-bar span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resize-handle {
+  border: 0;
+  width: 7px;
+  height: 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: ew-resize;
+  flex: 0 0 auto;
 }
 
 .stay-bar.occupied {

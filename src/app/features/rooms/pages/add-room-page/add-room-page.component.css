@@ -58,6 +58,11 @@
   font-size: 11px;
 }
 
+.form-card .error-text {
+  color: #dc2626;
+  font-weight: 600;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

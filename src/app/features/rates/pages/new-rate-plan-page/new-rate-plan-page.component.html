@@ -1,0 +1,96 @@
+<section class="new-rate-plan-page">
+  <div class="top-actions">
+    <a routerLink="/rates" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Rates
+    </a>
+    <a routerLink="/rates/add-promo-code" class="ghost-btn">
+      <i class="bi bi-ticket-perforated" aria-hidden="true"></i>
+      Add Promo Code
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Create New Rate Plan</h3>
+      <small>Define pricing rules, date controls, and sales channels.</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Rate Plan Code *</span>
+        <input type="text" placeholder="e.g. ADV14" />
+      </label>
+
+      <label>
+        <span>Rate Plan Name *</span>
+        <input type="text" placeholder="Advance Saver 14 Days" />
+      </label>
+
+      <label>
+        <span>Room Type *</span>
+        <select>
+          <option *ngFor="let type of roomTypes">{{ type }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Board Type *</span>
+        <select>
+          <option *ngFor="let type of boardTypes">{{ type }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Pricing Model *</span>
+        <select>
+          <option *ngFor="let model of pricingModels">{{ model }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Base Amount ($) *</span>
+        <input type="number" value="159" />
+      </label>
+    </div>
+
+    <section class="panel">
+      <h4>Booking Rules</h4>
+      <div class="form-grid rules-grid">
+        <label>
+          <span>Min Advance Booking (days)</span>
+          <input type="number" value="0" />
+        </label>
+        <label>
+          <span>Max Advance Booking (days)</span>
+          <input type="number" value="365" />
+        </label>
+        <label>
+          <span>Minimum Stay (nights)</span>
+          <input type="number" value="1" />
+        </label>
+        <label>
+          <span>Maximum Stay (nights)</span>
+          <input type="number" value="14" />
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h4>Channel Availability</h4>
+      <div class="check-grid">
+        <label *ngFor="let channel of channels">
+          <input type="checkbox" checked /> {{ channel }}
+        </label>
+      </div>
+    </section>
+
+    <footer class="footer-actions">
+      <a routerLink="/rates" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn">
+        <i class="bi bi-check2-circle" aria-hidden="true"></i>
+        Save Rate Plan
+      </button>
+    </footer>
+  </article>
+</section>

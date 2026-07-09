@@ -16,41 +16,43 @@
       <small>Set room identity, sell controls, and housekeeping defaults.</small>
     </header>
 
-    <div class="form-grid">
+    <small *ngIf="errorMessage" class="error-text">{{ errorMessage }}</small>
+
+    <form class="form-grid" (ngSubmit)="saveRoom()">
       <label>
         <span>Room Number *</span>
-        <input type="text" placeholder="e.g. 407" />
+        <input type="text" [(ngModel)]="roomNo" name="roomNo" placeholder="e.g. 407" required />
       </label>
 
       <label>
         <span>Room Type *</span>
-        <select>
-          <option *ngFor="let type of roomTypes">{{ type }}</option>
+        <select [(ngModel)]="roomType" name="roomType" required>
+          <option *ngFor="let type of roomTypes" [value]="type">{{ type }}</option>
         </select>
       </label>
 
       <label>
         <span>Floor *</span>
-        <select>
-          <option *ngFor="let floor of floors">{{ floor }}</option>
+        <select [(ngModel)]="floor" name="floor" required>
+          <option *ngFor="let floorValue of floors" [value]="floorValue">{{ floorValue }}</option>
         </select>
       </label>
 
       <label>
         <span>Bed Configuration</span>
-        <input type="text" placeholder="1 King / 2 Twin" />
+        <input type="text" [(ngModel)]="beds" name="beds" placeholder="1 King / 2 Twin" />
       </label>
 
       <label>
         <span>Max Occupancy</span>
-        <input type="number" value="2" />
+        <input type="number" [(ngModel)]="maxOccupancy" name="maxOccupancy" min="1" />
       </label>
 
       <label>
         <span>Base Rate ($)</span>
-        <input type="number" value="189" />
+        <input type="number" [(ngModel)]="rateNight" name="rateNight" min="0" />
       </label>
-    </div>
+    </form>
 
     <section class="panel">
       <h4>Sell Controls</h4>
@@ -84,7 +86,7 @@
 
     <footer class="footer-actions">
       <a routerLink="/rooms" class="ghost-btn">Cancel</a>
-      <button type="button" class="primary-btn">
+      <button type="button" class="primary-btn" (click)="saveRoom()">
         <i class="bi bi-check2-circle" aria-hidden="true"></i>
         Save Room
       </button>

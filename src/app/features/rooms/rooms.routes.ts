@@ -34,4 +34,26 @@ export const roomsRoutes: Routes = [
       subtitle: 'Create a room and default operating settings.',
     },
   },
+  {
+    path: 'view-room/:roomNo',
+    loadComponent: () =>
+      import('./pages/view-room-page/view-room-page.component').then(
+        (m) => m.ViewRoomPageComponent
+      ),
+    data: {
+      title: 'View Room',
+      subtitle: 'Read-only room details and current status.',
+    },
+  },
+  {
+    path: 'edit-room/:roomNo',
+    loadComponent: () =>
+      import('./pages/edit-room-page/edit-room-page.component').then(
+        (m) => m.EditRoomPageComponent
+      ),
+    data: {
+      title: 'Edit Room',
+      subtitle: 'Update status, housekeeping, and room settings.',
+    },
+  },
 ];

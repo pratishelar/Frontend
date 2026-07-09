@@ -1,0 +1,104 @@
+<section class="promo-codes-page">
+  <div class="metrics-grid">
+    <article class="metric-card" *ngFor="let metric of metrics">
+      <p>{{ metric.label }}</p>
+      <h3>{{ metric.value }}</h3>
+      <small>{{ metric.helper }}</small>
+      <span class="metric-icon" [ngClass]="'tone-' + metric.tone">
+        <i class="bi" [ngClass]="metric.icon" aria-hidden="true"></i>
+      </span>
+    </article>
+  </div>
+
+  <section class="filter-bar">
+    <label class="field search-field">
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+        placeholder="Search promo code or discount..."
+        aria-label="Search promo codes"
+      />
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedRatePlan" (change)="applyFilters()" aria-label="Filter by rate plan">
+        <option *ngFor="let plan of allRatePlans" [value]="plan">
+          Rate Plan: {{ plan }}
+        </option>
+      </select>
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedStatus" (change)="applyFilters()" aria-label="Filter by status">
+        <option *ngFor="let status of statusOptions" [value]="status">
+          Status: {{ status }}
+        </option>
+      </select>
+    </label>
+  </section>
+
+  <section class="promo-tabs">
+    <button
+      type="button"
+      class="promo-tab"
+      [class.active]="tab.label === selectedStatus"
+      (click)="onStatusTabChange(tab.label)"
+      *ngFor="let tab of promoTabs"
+    >
+      {{ tab.label }} ({{ tab.count }})
+    </button>
+  </section>
+
+  <article class="table-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>CODE</th>
+            <th>DISCOUNT</th>
+            <th>VALID FROM</th>
+            <th>VALID TO</th>
+            <th>MIN NIGHTS</th>
+            <th>MAX USES</th>
+            <th>APPLICABLE PLAN</th>
+            <th>DIRECT ONLY</th>
+            <th>STATUS</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let promo of pagedPromoCodes">
+            <td><strong>{{ promo.code }}</strong></td>
+            <td>{{ promo.discount }}</td>
+            <td>{{ promo.validFrom }}</td>
+            <td>{{ promo.validTo }}</td>
+            <td>{{ promo.minNights }}</td>
+            <td>{{ promo.maxUses }}</td>
+            <td>{{ promo.applicableRatePlan }}</td>
+            <td>{{ promo.directOnly ? 'Yes' : 'No' }}</td>
+            <td>
+              <span class="chip" [ngClass]="promo.status.toLowerCase()">
+                {{ promo.status }}
+              </span>
+            </td>
+            <td class="actions-col">
+              <a [routerLink]="['/rates/view-promo-code', promo.code]" class="mini-btn view">View</a>
+              <a [routerLink]="['/rates/edit-promo-code', promo.code]" class="mini-btn edit">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <app-table-pagination
+      [summary]="promoSummary"
+      [pageSizes]="pageSizes"
+      [selectedPageSize]="selectedPageSize"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageSizeChange)="onPageSizeChange($event)"
+      (previousPage)="onPreviousPage()"
+      (nextPage)="onNextPage()"
+    />
+  </article>
+</section>

@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Room, RoomStatus, RoomStay, StayTone } from '../../models/room.model';
+import { RoomsManagementService } from '../../services/rooms-management.service';
 
 type ViewMode = '2weeks' | 'month';
 
@@ -11,184 +14,76 @@ interface DayColumn {
   today?: boolean;
 }
 
-interface StayBar {
-  label: string;
-  startDate: Date;
-  endDate: Date;
-  tone: 'occupied' | 'confirmed' | 'vip' | 'hold' | 'ooo';
-}
-
 interface RenderedBar {
+  id: string;
   label: string;
   start: number;
   span: number;
-  tone: 'occupied' | 'confirmed' | 'vip' | 'hold' | 'ooo';
+  tone: StayTone;
 }
 
-interface RoomTimeline {
-  no: string;
-  type: string;
-  rate: string;
-  bars: StayBar[];
-  alert?: boolean;
+interface InteractionState {
+  mode: 'move' | 'resize';
+  stayId: string;
+  sourceRoomNo: string;
+  startClientX: number;
+  originalStart: Date;
+  originalEnd: Date;
 }
 
 interface FloorGroup {
   label: string;
-  rooms: RoomTimeline[];
+  rooms: Room[];
 }
 
 @Component({
   selector: 'app-rooms-calendar-view-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './rooms-calendar-view-page.component.html',
   styleUrl: './rooms-calendar-view-page.component.css',
 })
 export class RoomsCalendarViewPageComponent {
   readonly todayDate = new Date(2026, 4, 29);
+  readonly statusOptions: Array<'All' | RoomStatus> = [
+    'All',
+    'Available',
+    'Occupied',
+    'Cleaning',
+    'Out of Order',
+  ];
+
   viewMode: ViewMode = '2weeks';
   visibleStart = new Date(2026, 4, 29);
   days: DayColumn[] = [];
   rangeLabel = '';
+  allRooms: Room[] = [];
+  filteredRooms: Room[] = [];
+  allStays: RoomStay[] = [];
 
-  readonly floors: FloorGroup[] = [
-    {
-      label: 'Floor 1 — Standard Rooms',
-      rooms: [
-        {
-          no: '101',
-          type: 'Std King',
-          rate: '$149',
-          bars: [
-            { label: 'J. Smith', startDate: new Date(2026, 4, 29), endDate: new Date(2026, 5, 1), tone: 'occupied' },
-          ],
-        },
-        {
-          no: '102',
-          type: 'Std Queen',
-          rate: '$129',
-          bars: [
-            { label: 'D. Wilson', startDate: new Date(2026, 5, 3), endDate: new Date(2026, 5, 6), tone: 'occupied' },
-          ],
-        },
-        {
-          no: '103',
-          type: 'Std King',
-          rate: '$149',
-          bars: [
-            { label: 'T. Williams', startDate: new Date(2026, 5, 1), endDate: new Date(2026, 5, 5), tone: 'confirmed' },
-          ],
-        },
-        {
-          no: '104',
-          type: 'Std Queen',
-          rate: '$129',
-          alert: true,
-          bars: [
-            { label: 'Out of Order', startDate: new Date(2026, 4, 29), endDate: new Date(2026, 5, 11), tone: 'ooo' },
-          ],
-        },
-        {
-          no: '105',
-          type: 'Std King',
-          rate: '$149',
-          bars: [
-            { label: 'D. Park', startDate: new Date(2026, 4, 30), endDate: new Date(2026, 4, 31), tone: 'occupied' },
-            { label: 'M. Brown', startDate: new Date(2026, 5, 4), endDate: new Date(2026, 5, 7), tone: 'vip' },
-          ],
-        },
-        {
-          no: '106',
-          type: 'Std Queen',
-          rate: '$129',
-          bars: [
-            { label: 'R. Johnson', startDate: new Date(2026, 5, 3), endDate: new Date(2026, 5, 7), tone: 'occupied' },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Floor 2 — Deluxe Rooms',
-      rooms: [
-        {
-          no: '201',
-          type: 'Dlx King',
-          rate: '$189',
-          bars: [
-            { label: 'Cleaning', startDate: new Date(2026, 4, 29), endDate: new Date(2026, 4, 30), tone: 'hold' },
-            { label: 'P. Kumar', startDate: new Date(2026, 5, 1), endDate: new Date(2026, 5, 3), tone: 'occupied' },
-          ],
-        },
-        {
-          no: '202',
-          type: 'Dlx Twin',
-          rate: '$179',
-          bars: [
-            { label: 'R. Patel', startDate: new Date(2026, 4, 29), endDate: new Date(2026, 4, 31), tone: 'occupied' },
-            { label: 'A. Santos', startDate: new Date(2026, 5, 3), endDate: new Date(2026, 5, 6), tone: 'confirmed' },
-          ],
-        },
-        {
-          no: '203',
-          type: 'Dlx King',
-          rate: '$189',
-          bars: [
-            { label: 'Cleaning', startDate: new Date(2026, 4, 29), endDate: new Date(2026, 4, 30), tone: 'hold' },
-            { label: 'S. Martin', startDate: new Date(2026, 5, 1), endDate: new Date(2026, 5, 5), tone: 'vip' },
-          ],
-        },
-        {
-          no: '204',
-          type: 'Dlx Queen',
-          rate: '$179',
-          bars: [
-            { label: 'D. Park Jr.', startDate: new Date(2026, 5, 1), endDate: new Date(2026, 5, 5), tone: 'occupied' },
-          ],
-        },
-        {
-          no: '205',
-          type: 'Dlx Twin',
-          rate: '$179',
-          bars: [
-            { label: 'C. Lee', startDate: new Date(2026, 5, 6), endDate: new Date(2026, 5, 8), tone: 'confirmed' },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Floor 3 — Suites',
-      rooms: [
-        {
-          no: '301',
-          type: 'Jr Suite',
-          rate: '$289',
-          bars: [
-            { label: 'J. Lee', startDate: new Date(2026, 5, 1), endDate: new Date(2026, 5, 5), tone: 'vip' },
-          ],
-        },
-        {
-          no: '302',
-          type: 'Suite Dlx',
-          rate: '$329',
-          bars: [
-            { label: 'J. Lee Jr.', startDate: new Date(2026, 5, 1), endDate: new Date(2026, 5, 5), tone: 'occupied' },
-          ],
-        },
-        {
-          no: '305',
-          type: 'Ocean Ste',
-          rate: '$349',
-          bars: [
-            { label: 'L. Wong ★', startDate: new Date(2026, 4, 29), endDate: new Date(2026, 5, 1), tone: 'occupied' },
-            { label: 'VIP Hold', startDate: new Date(2026, 5, 8), endDate: new Date(2026, 5, 11), tone: 'hold' },
-          ],
-        },
-      ],
-    },
-  ];
+  floorOptions: string[] = ['All'];
+  roomTypeOptions: string[] = ['All'];
 
-  constructor() {
+  selectedFloor = 'All';
+  selectedType = 'All';
+  selectedStatus: 'All' | RoomStatus = 'All';
+  private interaction?: InteractionState;
+  private readonly previewByStayId = new Map<string, { startDate: string; endDate: string }>();
+  private readonly dayPixelWidth = 68;
+  private hoveredRoomNo?: string;
+
+  constructor(private readonly roomsService: RoomsManagementService) {
+    this.roomsService.stays$.subscribe((stays) => {
+      this.allStays = stays;
+    });
+
+    this.roomsService.rooms$.subscribe((rooms) => {
+      this.allRooms = rooms;
+      this.floorOptions = ['All', ...Array.from(new Set(rooms.map((room) => room.floor)))];
+      this.roomTypeOptions = ['All', ...Array.from(new Set(rooms.map((room) => room.type)))];
+      this.applyFilters();
+    });
+
     this.rebuildDays();
   }
 
@@ -198,6 +93,107 @@ export class RoomsCalendarViewPageComponent {
 
   get isTodayRange(): boolean {
     return this.sameDate(this.visibleStart, this.todayDate);
+  }
+
+  get floors(): FloorGroup[] {
+    const groups = new Map<string, Room[]>();
+
+    for (const room of this.filteredRooms) {
+      const list = groups.get(room.floor) ?? [];
+      list.push(room);
+      groups.set(room.floor, list);
+    }
+
+    return Array.from(groups.entries())
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([floor, rooms]) => ({
+        label: `Floor ${floor}`,
+        rooms: rooms.sort((a, b) => Number(a.roomNo) - Number(b.roomNo)),
+      }));
+  }
+
+  get availableCount(): number {
+    return this.filteredRooms.filter((room) => room.status === 'Available').length;
+  }
+
+  get occupiedCount(): number {
+    return this.filteredRooms.filter((room) => room.status === 'Occupied').length;
+  }
+
+  get cleaningCount(): number {
+    return this.filteredRooms.filter((room) => room.status === 'Cleaning').length;
+  }
+
+  get outOfOrderCount(): number {
+    return this.filteredRooms.filter((room) => room.status === 'Out of Order').length;
+  }
+
+  get occupancyPercent(): number {
+    if (this.filteredRooms.length === 0) {
+      return 0;
+    }
+
+    return Math.round((this.occupiedCount / this.filteredRooms.length) * 100);
+  }
+
+  get arrivalsToday(): number {
+    return this.allStays.filter((stay) => {
+      if (!this.hasRoom(stay.roomNo)) {
+        return false;
+      }
+
+      return this.sameDate(this.parseDate(stay.startDate), this.todayDate);
+    }).length;
+  }
+
+  get departuresToday(): number {
+    return this.allStays.filter((stay) => {
+      if (!this.hasRoom(stay.roomNo)) {
+        return false;
+      }
+
+      return this.sameDate(this.parseDate(stay.endDate), this.todayDate);
+    }).length;
+  }
+
+  get averageStayNights(): string {
+    const filteredStays = this.allStays.filter((stay) => this.hasRoom(stay.roomNo));
+
+    if (filteredStays.length === 0) {
+      return '0.0';
+    }
+
+    const totalNights = filteredStays.reduce((sum, stay) => {
+      return sum + this.diffDays(this.parseDate(stay.startDate), this.parseDate(stay.endDate)) + 1;
+    }, 0);
+
+    return (totalNights / filteredStays.length).toFixed(1);
+  }
+
+  get adr(): number {
+    if (this.occupiedCount === 0) {
+      return 0;
+    }
+
+    const occupiedRevenue = this.filteredRooms
+      .filter((room) => room.status === 'Occupied')
+      .reduce((sum, room) => sum + room.rateNight, 0);
+
+    return Math.round(occupiedRevenue / this.occupiedCount);
+  }
+
+  get revpar(): number {
+    return Math.round((this.adr * this.occupancyPercent) / 100);
+  }
+
+  applyFilters(): void {
+    this.filteredRooms = this.allRooms.filter((room) => {
+      const matchesFloor = this.selectedFloor === 'All' || room.floor === this.selectedFloor;
+      const matchesType = this.selectedType === 'All' || room.type === this.selectedType;
+      const matchesStatus = this.selectedStatus === 'All' || room.status === this.selectedStatus;
+
+      return matchesFloor && matchesType && matchesStatus;
+    });
   }
 
   setViewMode(mode: ViewMode): void {
@@ -215,19 +211,128 @@ export class RoomsCalendarViewPageComponent {
     this.rebuildDays();
   }
 
-  barsFor(room: RoomTimeline): RenderedBar[] {
-    const rangeEnd = this.addDays(this.visibleStart, this.dayCount - 1);
+  onBarMouseDown(
+    event: MouseEvent,
+    bar: RenderedBar,
+    roomNo: string,
+    mode: 'move' | 'resize'
+  ): void {
+    event.preventDefault();
+    event.stopPropagation();
 
-    return room.bars
+    const source = this.allStays.find((stay) => stay.id === bar.id);
+    if (!source) {
+      return;
+    }
+
+    this.interaction = {
+      mode,
+      stayId: source.id,
+      sourceRoomNo: roomNo,
+      startClientX: event.clientX,
+      originalStart: this.parseDate(source.startDate),
+      originalEnd: this.parseDate(source.endDate),
+    };
+
+    this.hoveredRoomNo = roomNo;
+  }
+
+  isInteracting(stayId: string): boolean {
+    return this.interaction?.stayId === stayId;
+  }
+
+  onRoomHover(roomNo: string): void {
+    if (!this.interaction || this.interaction.mode !== 'move') {
+      return;
+    }
+
+    this.hoveredRoomNo = roomNo;
+  }
+
+  isDropTarget(roomNo: string): boolean {
+    return (
+      this.interaction?.mode === 'move' &&
+      this.hoveredRoomNo === roomNo &&
+      this.interaction.sourceRoomNo !== roomNo
+    );
+  }
+
+  @HostListener('window:mousemove', ['$event'])
+  onPointerMove(event: MouseEvent): void {
+    if (!this.interaction) {
+      return;
+    }
+
+    const deltaDays = Math.round((event.clientX - this.interaction.startClientX) / this.dayPixelWidth);
+
+    if (deltaDays === 0 && !this.previewByStayId.has(this.interaction.stayId)) {
+      return;
+    }
+
+    let nextStart = this.interaction.originalStart;
+    let nextEnd = this.interaction.originalEnd;
+
+    if (this.interaction.mode === 'move') {
+      nextStart = this.addDays(this.interaction.originalStart, deltaDays);
+      nextEnd = this.addDays(this.interaction.originalEnd, deltaDays);
+    } else {
+      nextEnd = this.addDays(this.interaction.originalEnd, deltaDays);
+      if (this.diffDays(this.interaction.originalStart, nextEnd) < 0) {
+        nextEnd = this.interaction.originalStart;
+      }
+    }
+
+    this.previewByStayId.set(this.interaction.stayId, {
+      startDate: this.formatDate(nextStart),
+      endDate: this.formatDate(nextEnd),
+    });
+  }
+
+  @HostListener('window:mouseup')
+  onPointerUp(): void {
+    if (!this.interaction) {
+      return;
+    }
+
+    const preview = this.previewByStayId.get(this.interaction.stayId);
+    if (preview) {
+      this.roomsService.updateStay(
+        this.interaction.stayId,
+        {
+          startDate: preview.startDate,
+          endDate: preview.endDate,
+          roomNo:
+            this.interaction.mode === 'move' && this.hoveredRoomNo
+              ? this.hoveredRoomNo
+              : undefined,
+        }
+      );
+      this.previewByStayId.delete(this.interaction.stayId);
+    }
+
+    this.interaction = undefined;
+    this.hoveredRoomNo = undefined;
+  }
+
+  barsFor(room: Room): RenderedBar[] {
+    const rangeEnd = this.addDays(this.visibleStart, this.dayCount - 1);
+    const roomStays = this.allStays.filter((stay) => stay.roomNo === room.roomNo);
+
+    return roomStays
       .map((bar) => {
-        const clippedStart = bar.startDate > this.visibleStart ? bar.startDate : this.visibleStart;
-        const clippedEnd = bar.endDate < rangeEnd ? bar.endDate : rangeEnd;
+        const preview = this.previewByStayId.get(bar.id);
+        const startDate = this.parseDate(preview?.startDate ?? bar.startDate);
+        const endDate = this.parseDate(preview?.endDate ?? bar.endDate);
+
+        const clippedStart = startDate > this.visibleStart ? startDate : this.visibleStart;
+        const clippedEnd = endDate < rangeEnd ? endDate : rangeEnd;
 
         if (this.diffDays(clippedStart, clippedEnd) < 0) {
           return null;
         }
 
         return {
+          id: bar.id,
           label: bar.label,
           start: this.diffDays(this.visibleStart, clippedStart),
           span: this.diffDays(clippedStart, clippedEnd) + 1,
@@ -235,6 +340,10 @@ export class RoomsCalendarViewPageComponent {
         };
       })
       .filter((bar): bar is RenderedBar => bar !== null);
+  }
+
+  formatRate(value: number): string {
+    return `$${Math.round(value)}`;
   }
 
   private rebuildDays(): void {
@@ -259,6 +368,22 @@ export class RoomsCalendarViewPageComponent {
     const next = new Date(date);
     next.setDate(next.getDate() + days);
     return next;
+  }
+
+  private parseDate(value: string): Date {
+    const [year, month, day] = value.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  private formatDate(value: Date): string {
+    const year = value.getFullYear();
+    const month = String(value.getMonth() + 1).padStart(2, '0');
+    const day = String(value.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  private hasRoom(roomNo: string): boolean {
+    return this.filteredRooms.some((room) => room.roomNo === roomNo);
   }
 
   private diffDays(start: Date, end: Date): number {

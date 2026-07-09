@@ -1,0 +1,142 @@
+<section class="reports-page">
+  <section class="period-bar">
+    <button
+      type="button"
+      class="period-tab"
+      [class.active]="tab === selectedPeriod"
+      *ngFor="let tab of periodTabs"
+      (click)="selectedPeriod = tab"
+    >
+      {{ tab }}
+    </button>
+  </section>
+
+  <div class="metrics-grid">
+    <article class="metric-card" *ngFor="let metric of metrics">
+      <p>{{ metric.label }}</p>
+      <h3>{{ metric.value }}</h3>
+      <small>{{ metric.helper }}</small>
+      <span class="metric-icon" [ngClass]="'tone-' + metric.tone">{{ metric.icon }}</span>
+    </article>
+  </div>
+
+  <section class="grid-two">
+    <article class="panel wide">
+      <header>
+        <h3>Monthly Revenue - May 2026</h3>
+        <small>MTD Total: <strong>$42,800</strong> <span>+12% vs April ($38,200)</span></small>
+      </header>
+
+      <div class="revenue-chart">
+        <div class="bar" *ngFor="let value of weeklyRevenue; let i = index" [style.height.%]="(value / 12000) * 100">
+          <b>${{ value | number }}</b>
+          <span>{{ weekLabel(i) }}</span>
+        </div>
+        <div class="bar placeholder">
+          <b>In progress</b>
+          <span>This Week</span>
+        </div>
+      </div>
+
+      <footer class="mini-stats">
+        <small>Daily Avg: $1,457</small>
+        <small>Best Day: Fri May 23 - $2,100</small>
+        <small>Worst: Mon May 6 - $840</small>
+      </footer>
+    </article>
+
+    <article class="panel narrow">
+      <header>
+        <h3>Occupancy by Room Type</h3>
+        <small>May 2026 average</small>
+      </header>
+
+      <div class="stacked-bar">
+        <div
+          class="segment"
+          *ngFor="let item of averageOccupancyByType"
+          [style.width.%]="item.percent"
+          [style.background]="item.color"
+        ></div>
+      </div>
+
+      <div class="type-list">
+        <div class="type-row" *ngFor="let item of averageOccupancyByType">
+          <div class="left">
+            <span class="dot" [style.background]="item.color"></span>
+            <span>{{ item.label }}</span>
+          </div>
+          <strong>{{ item.percent }}%</strong>
+          <small>{{ item.rooms }} rooms</small>
+          <div class="line">
+            <span [style.width.%]="item.percent" [style.background]="item.color"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="grid-two lower">
+    <article class="panel source">
+      <header>
+        <h3>Bookings by Source</h3>
+        <small>May 2026 - 184 total bookings</small>
+      </header>
+
+      <div class="source-list">
+        <div class="source-row" *ngFor="let source of bookingSources">
+          <span class="label">{{ source.label }}</span>
+          <div class="track"><span [style.width.%]="(source.value / bookingSourceTotal) * 100" [style.background]="source.color"></span></div>
+          <strong>{{ source.value }} ({{ ((source.value / bookingSourceTotal) * 100) | number: '1.0-0' }}%)</strong>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel rooms">
+      <header>
+        <h3>Top Performing Rooms</h3>
+        <small>By revenue - May 2026</small>
+      </header>
+
+      <table class="mini-table">
+        <thead>
+          <tr>
+            <th>ROOM</th>
+            <th>TYPE</th>
+            <th>NIGHTS</th>
+            <th>REVENUE</th>
+            <th>ADR</th>
+            <th>OCCUPANCY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let room of topRooms">
+            <td><a [routerLink]="['/reports/new-report']">{{ room.room }}</a></td>
+            <td>{{ room.type }}</td>
+            <td>{{ room.nights }}</td>
+            <td><strong>{{ room.revenue }}</strong></td>
+            <td>{{ room.adr }}</td>
+            <td>
+              <div class="occ-line"><span [style.width.%]="room.occupancy"></span></div>
+              {{ room.occupancy }}%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <article class="panel bottom-strip">
+    <header>
+      <h3>Month-over-Month Comparison</h3>
+    </header>
+    <div class="stats-row">
+      <div><small>Revenue</small><strong>$42,800</strong><span>+12%</span></div>
+      <div><small>Bookings</small><strong>184</strong><span>+8%</span></div>
+      <div><small>Occupancy</small><strong>74%</strong><span>+6%</span></div>
+      <div><small>ADR</small><strong>$187</strong><span>+4%</span></div>
+      <div><small>RevPAR</small><strong>$146</strong><span>+8%</span></div>
+      <div><small>Avg Stay</small><strong>2.8 nts</strong><span>+9%</span></div>
+    </div>
+  </article>
+</section>

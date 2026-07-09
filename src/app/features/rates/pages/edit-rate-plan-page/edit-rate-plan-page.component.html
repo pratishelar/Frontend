@@ -1,0 +1,66 @@
+<section class="edit-page" *ngIf="plan; else notFound">
+  <div class="top-actions">
+    <a [routerLink]="['/rates/view-rate-plan', plan.code]" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Details
+    </a>
+  </div>
+
+  <article class="form-card">
+    <header>
+      <h3>Edit Rate Plan</h3>
+      <small>{{ plan.code }}</small>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        <span>Plan Name</span>
+        <input type="text" [value]="plan.name" />
+      </label>
+      <label>
+        <span>Room Type</span>
+        <input type="text" [value]="plan.roomType" />
+      </label>
+      <label>
+        <span>Board Type</span>
+        <input type="text" [value]="plan.boardType" />
+      </label>
+      <label>
+        <span>Base Amount</span>
+        <input type="text" [value]="plan.amount" />
+      </label>
+      <label>
+        <span>Pricing Model</span>
+        <input type="text" [value]="plan.pricingModel" />
+      </label>
+      <label>
+        <span>Status</span>
+        <input type="text" [value]="plan.status" />
+      </label>
+      <label>
+        <span>Booking Window</span>
+        <input type="text" [value]="plan.bookingWindow" />
+      </label>
+      <label>
+        <span>Stay Window</span>
+        <input type="text" [value]="plan.stayWindow" />
+      </label>
+      <label>
+        <span>Channels</span>
+        <input type="text" [value]="plan.channels" />
+      </label>
+    </div>
+
+    <footer class="footer-actions">
+      <a routerLink="/rates" class="ghost-btn">Cancel</a>
+      <button type="button" class="primary-btn">Save Changes</button>
+    </footer>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="form-card not-found">
+    <h3>Rate plan not found</h3>
+    <a routerLink="/rates" class="ghost-btn">Back to Rates</a>
+  </article>
+</ng-template>

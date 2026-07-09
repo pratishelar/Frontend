@@ -1,0 +1,35 @@
+<section class="details-page" *ngIf="promo; else notFound">
+  <div class="top-actions">
+    <a routerLink="/rates/promo-codes" class="ghost-btn">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Promo Codes
+    </a>
+    <a [routerLink]="['/rates/edit-promo-code', promo.code]" class="primary-btn">
+      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+      Edit Promo Code
+    </a>
+  </div>
+
+  <article class="details-card">
+    <header>
+      <h3>{{ promo.code }}</h3>
+      <small>{{ promo.status }}</small>
+    </header>
+
+    <div class="grid">
+      <p><span>Discount</span>{{ promo.discount }}</p>
+      <p><span>Validity</span>{{ promo.validFrom }} - {{ promo.validTo }}</p>
+      <p><span>Minimum Nights</span>{{ promo.minNights }}</p>
+      <p><span>Maximum Uses</span>{{ promo.maxUses }}</p>
+      <p><span>Applicable Plan</span>{{ promo.applicableRatePlan }}</p>
+      <p><span>Direct Bookings Only</span>{{ promo.directOnly ? 'Yes' : 'No' }}</p>
+    </div>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <article class="details-card not-found">
+    <h3>Promo code not found</h3>
+    <a routerLink="/rates/promo-codes" class="ghost-btn">Back to Promo Codes</a>
+  </article>
+</ng-template>

@@ -1,0 +1,118 @@
+<section class="rates-page">
+  <div class="metrics-grid">
+    <article class="metric-card" *ngFor="let metric of metrics">
+      <p>{{ metric.label }}</p>
+      <h3>{{ metric.value }}</h3>
+      <small>{{ metric.helper }}</small>
+      <span class="metric-icon" [ngClass]="'tone-' + metric.tone">
+        <i class="bi" [ngClass]="metric.icon" aria-hidden="true"></i>
+      </span>
+    </article>
+  </div>
+
+  <section class="filter-bar">
+    <label class="field search-field">
+      <i class="bi bi-search" aria-hidden="true"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+        placeholder="Search plan code or name..."
+        aria-label="Search rate plans"
+      />
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedRoomType" (change)="applyFilters()" aria-label="Filter by room type">
+        <option *ngFor="let roomType of roomTypeOptions" [value]="roomType">
+          Room Type: {{ roomType }}
+        </option>
+      </select>
+    </label>
+    <label class="field">
+      <select [(ngModel)]="selectedChannel" (change)="applyFilters()" aria-label="Filter by channel">
+        <option *ngFor="let channel of channelOptions" [value]="channel">
+          Channel: {{ channel }}
+        </option>
+      </select>
+    </label>
+    <label class="field">
+      <select
+        [(ngModel)]="selectedStatus"
+        (change)="applyFilters()"
+        aria-label="Filter by status"
+      >
+        <option *ngFor="let status of statusOptions" [value]="status">
+          Status: {{ status }}
+        </option>
+      </select>
+    </label>
+  </section>
+
+  <section class="rate-tabs">
+    <button
+      type="button"
+      class="rate-tab"
+      [class.active]="tab.label === selectedStatus"
+      (click)="onStatusTabChange(tab.label)"
+      *ngFor="let tab of rateTabs"
+    >
+      {{ tab.label }} ({{ tab.count }})
+    </button>
+  </section>
+
+  <article class="table-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>PLAN CODE</th>
+            <th>PLAN NAME</th>
+            <th>ROOM TYPE</th>
+            <th>BOARD</th>
+            <th>BASE RATE</th>
+            <th>MODEL</th>
+            <th>BOOKING WINDOW</th>
+            <th>STAY WINDOW</th>
+            <th>CHANNELS</th>
+            <th>STATUS</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let plan of pagedRatePlans">
+            <td><strong>{{ plan.code }}</strong></td>
+            <td>{{ plan.name }}</td>
+            <td>{{ plan.roomType }}</td>
+            <td>{{ plan.boardType }}</td>
+            <td class="rate">{{ plan.amount }}</td>
+            <td>{{ plan.pricingModel }}</td>
+            <td>{{ plan.bookingWindow }}</td>
+            <td>{{ plan.stayWindow }}</td>
+            <td>{{ plan.channels }}</td>
+            <td>
+              <span class="chip" [ngClass]="plan.status.toLowerCase()">
+                {{ plan.status }}
+              </span>
+            </td>
+            <td class="actions-col">
+              <a [routerLink]="['/rates/view-rate-plan', plan.code]" class="mini-btn view">View</a>
+              <a [routerLink]="['/rates/edit-rate-plan', plan.code]" class="mini-btn edit">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <app-table-pagination
+      [summary]="plansSummary"
+      [pageSizes]="pageSizes"
+      [selectedPageSize]="selectedPageSize"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageSizeChange)="onPageSizeChange($event)"
+      (previousPage)="onPreviousPage()"
+      (nextPage)="onNextPage()"
+    />
+  </article>
+
+</section>
